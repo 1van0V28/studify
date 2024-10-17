@@ -1,5 +1,8 @@
+import styles from '@/shared/styles/AccountButton.module.css'
+
+
 export function AccountButton() {
     return (
-        <button></button>
+        <button className={styles.button}></button>
     )
 }

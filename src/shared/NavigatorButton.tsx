@@ -1,5 +1,8 @@
+import styles from '@/shared/styles/NavigatorButton.module.css'
+
+
 export function NavigatorButton() {
     return (
-        <button></button>
+        <button className={styles.button}></button>
     )
 }
