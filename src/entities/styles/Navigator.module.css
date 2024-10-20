@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     width: 6%;
-    border: 2px solid black;
 }
 
 
@@ -12,7 +11,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 11%; /*у остальных 10% возможно из-за выделения границ*/
+    height: 10%; /*у остальных 10% возможно из-за выделения границ*/
+    background-color: #e9ecef;
 }
 .container_navigator {
     display: flex;
@@ -20,6 +20,6 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height: 100%;
-    border: 2px solid orange;
+    height: 90%;
+    background-color: #e9ecef;
 }

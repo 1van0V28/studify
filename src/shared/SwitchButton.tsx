@@ -1,5 +1,8 @@
+import styles from '@/shared/styles/SwitchButton.module.css'
+
+
 export function SwitchButton() {
     return (
-        <button></button>
+        <button className={styles.button}></button>
     )
 }

@@ -17,6 +17,8 @@ export function TodayTimetable() {
                 <Event />
                 <Event />
                 <Event />
+                <Event />
+                <Event />
             </div>
         </section>
     )

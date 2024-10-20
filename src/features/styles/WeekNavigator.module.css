@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    column-gap: 10px;
     height: 10%;
-    border: 2px solid purple;
+    background-color: #e9ecef;
 }
