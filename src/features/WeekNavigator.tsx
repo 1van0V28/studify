@@ -3,12 +3,12 @@ import { WeekInfo } from '@/shared/WeekInfo'
 import styles from '@/features/styles/WeekNavigator.module.css'
 
 
-export function WeekNavigator() {
+export function WeekNavigator(props: {currentDate: Date, switchWeek: (switcher: 'prev' | 'next') => void}) {
     return (
         <header className={styles.container}>
-            <SwitchButton />
-            <WeekInfo />
-            <SwitchButton />
+            <SwitchButton direction='prev' switchWeek={props.switchWeek}/>
+            <WeekInfo currentDate={props.currentDate}/>
+            <SwitchButton direction='next' switchWeek={props.switchWeek}/>
         </header>
     )
 }

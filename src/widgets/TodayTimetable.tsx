@@ -3,12 +3,12 @@ import { Event } from '@/widgets/Event'
 import styles from '@/widgets/styles/TodayTimetable.module.css'
 
 
-export function TodayTimetable() {
+export function TodayTimetable(props: {todayDate: Date}) {
     return (
         <section className={styles.container}>
             <header className={styles.container_dayinfo}>
-                <h1>Сегодня</h1>
-                <DayInfo />
+                <h2>Сегодня</h2>
+                <DayInfo date={props.todayDate}/>
             </header>
             <div className={styles.container_events}>
                 <Event />

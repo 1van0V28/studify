@@ -4,3 +4,8 @@
    border-radius: 2vw;
    background-color: black;
 }
+
+
+.button:active {
+   background-color: grey;
+}
