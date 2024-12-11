@@ -1,4 +1,4 @@
-import styles from '@/shared/styles/EventInfoText.module.css'
+import styles from '@/app/styles/styles_shared/EventInfoText.module.css'
 
 
 export function EventInfoText() {

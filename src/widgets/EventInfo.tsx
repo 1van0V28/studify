@@ -1,20 +1,20 @@
-import { useId, useContext } from 'react'
 import { EventInfoText } from '@/shared/EventInfoText'
 import { EventCategoryButton } from '@/shared/EventCategoryButton'
-import { FirestoreContext } from '@/app/context/firestoreContext'
-import styles from '@/widgets/styles/EventInfo.module.css'
+import styles from '@/app/styles/styles_widgets/EventInfo.module.css'
 
 
-export function EventInfo() {
-    const formId = useId()
-    const firestore = useContext(FirestoreContext)
+export function EventInfo(props: {eventInfoState: {display: 'hidden' | 'visible', eventInfo: {}}, closeEventInfo: () => void}) {
+    const dialogStyle = (props.eventInfoState.display === 'hidden' 
+    ? 
+    styles.container_hidden
+    : 
+    styles.container)
 
     return (
-        <dialog className={styles.container}>
-            <form id={formId}>
+        <dialog className={dialogStyle}>
                 <div className={styles.container_top}>
                     <EventInfoText />
-                    <button>X</button>
+                    <button className={styles.button} onClick={props.closeEventInfo}>X</button> {/*господу помолимся*/}
                 </div>
                 <EventInfoText />
                 <div>
@@ -38,8 +38,6 @@ export function EventInfo() {
                     <EventCategoryButton />
                 </div>
                 <button className={styles.button}>Сохранить</button>
-            </form>
-            
         </dialog>
     )
 }

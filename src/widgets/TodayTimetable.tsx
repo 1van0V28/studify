@@ -1,6 +1,6 @@
 import { DayInfo } from '@/shared/DayInfo'
 import { Event } from '@/widgets/Event'
-import styles from '@/widgets/styles/TodayTimetable.module.css'
+import styles from '@/app/styles/styles_widgets/TodayTimetable.module.css'
 
 
 export function TodayTimetable(props: {todayDate: Date}) {

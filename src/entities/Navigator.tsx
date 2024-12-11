@@ -1,6 +1,6 @@
 import { AccountButton } from '@/shared/AccountButton'
 import { NavigatorButton } from '@/shared/NavigatorButton'
-import styles from '@/entities/styles/Navigator.module.css'
+import styles from '@/app/styles/styles_entities/Navigator.module.css'
 
 
 export function Navigator() {

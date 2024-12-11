@@ -1,0 +1,22 @@
+.button,
+.button_active {
+    width: calc(80% + 10px);
+    height: 15%;
+    border-radius: 10px;
+    font-size: larger;
+    font-weight: 500;
+}
+
+
+.button {
+    background-color: transparent;
+    border: 4px solid green;
+    color: green;
+}
+
+
+.button_active {
+    background-color: green;
+    color: #f8f9fa;
+    cursor: pointer;
+}

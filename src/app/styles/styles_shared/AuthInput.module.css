@@ -1,0 +1,25 @@
+.input,
+.input_valid,
+.input_error {
+    padding: 10px;
+    width: 90%;
+    background-color: transparent;
+    border-radius: 10px;
+    outline: 3px solid #adb5bd;
+    font-size: larger;
+    font-weight: 500;
+}
+
+.input:focus,
+.input_valid:focus,
+.input_error:focus {
+    outline: 3px solid #212529;
+}
+
+.input_valid {
+    outline: 3px solid green;
+}
+
+.input_error {
+    outline: 3px solid red;
+}

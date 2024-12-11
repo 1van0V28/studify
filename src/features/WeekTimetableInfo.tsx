@@ -1,7 +1,6 @@
 import { DayInfo } from '@/shared/DayInfo'
 import { Event } from '@/widgets/Event'
-import { AddEventButton } from '@/shared/AddEventButton'
-import styles from '@/features/styles/WeekTimetableInfo.module.css'
+import styles from '@/app/styles/styles_features/WeekTimetableInfo.module.css'
 
 
 const getStartDate = function(currentDate: Date) {
@@ -12,7 +11,7 @@ const getStartDate = function(currentDate: Date) {
 }
 
 
-export function WeekTimetableInfo(props: {currentDate: Date}) {
+export function WeekTimetableInfo(props: {currentDate: Date, changeEventInfo: (eventInfo: {}) => void}) {
     const startDate = getStartDate(props.currentDate)
 
     const dayInfoList = []
@@ -28,100 +27,22 @@ export function WeekTimetableInfo(props: {currentDate: Date}) {
         )
     }
 
+    const eventList = []
+    for (let i = 0; i < 20; i++) {
+        const key = crypto.randomUUID()
+        
+        eventList.push(
+            <div key={key} className={styles.container_event}>
+                <Event changeEventInfo={props.changeEventInfo}/>
+            </div>
+        )
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.timetable}>
                 {dayInfoList}
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <AddEventButton/>
-                </div>
-                <div className={styles.container_event}>
-                    <AddEventButton />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <AddEventButton />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
-                <div className={styles.container_event}>
-                    <Event />
-                </div>
+                {eventList}
             </div>
         </div>
     )

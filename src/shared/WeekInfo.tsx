@@ -1,4 +1,4 @@
-import styles from '@/shared/styles/WeekInfo.module.css'
+import styles from '@/app/styles/styles_shared/WeekInfo.module.css'
 
 
 const getWeeklyBoundaries = function(currentDate: Date) {

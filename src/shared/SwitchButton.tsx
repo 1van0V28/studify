@@ -1,4 +1,4 @@
-import styles from '@/shared/styles/SwitchButton.module.css'
+import styles from '@/app/styles/styles_shared/SwitchButton.module.css'
 
 
 export function SwitchButton(props: {direction: 'prev' | 'next', switchWeek: (switcher: 'prev' | 'next') => void}) {

@@ -1,0 +1,23 @@
+.button,
+.button_active {
+    height: 2em;
+    background-color: transparent;
+    border-bottom: 4px solid;
+    font-size: larger;
+    font-weight: 500;
+}
+
+.button:hover,
+.button_active:hover {
+    cursor: pointer;
+}
+
+.button {
+    border-bottom-color: transparent;
+    color: #adb5bd;
+}
+
+.button_active {
+    border-bottom-color: green;
+    color: #212529;
+}

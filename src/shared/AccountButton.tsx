@@ -1,4 +1,4 @@
-import styles from '@/shared/styles/AccountButton.module.css'
+import styles from '@/app/styles/styles_shared/AccountButton.module.css'
 
 
 export function AccountButton() {

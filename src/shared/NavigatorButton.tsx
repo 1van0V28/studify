@@ -1,4 +1,4 @@
-import styles from '@/shared/styles/NavigatorButton.module.css'
+import styles from '@/app/styles/styles_shared/NavigatorButton.module.css'
 
 
 export function NavigatorButton() {
