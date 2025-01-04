@@ -1,0 +1,25 @@
+.input {
+    display: none;
+}
+
+
+.label {
+    padding: 5px;
+    display: inline-flex;
+    border: 3px solid green;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+
+label .input:checked + .label {
+    background-color: green;
+    color: #f8f9fa;
+}
+
+
+
+
+

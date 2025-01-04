@@ -1,0 +1,15 @@
+.input {
+    padding: 10px;
+    width: 80%;
+    border-radius: 10px;
+    outline: 3px solid #adb5bd;
+    font-size: larger;
+}
+
+.input::placeholder {
+    color: #adb5bd;
+}
+
+.input:focus {
+    outline-color: black; 
+}

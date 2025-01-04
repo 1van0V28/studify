@@ -1,6 +1,10 @@
 .button {
-    width: 2vw;
-    height: 2vw;
-    border-radius: 2vw;
-    background-color: grey;
+    padding: 1vw;
+    border-radius: 100%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #dee2e6;
 }

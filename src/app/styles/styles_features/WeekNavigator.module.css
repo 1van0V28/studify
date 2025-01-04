@@ -4,5 +4,22 @@
     align-items: center;
     column-gap: 10px;
     height: 10%;
-    background-color: #e9ecef;
+}
+
+
+.button {
+    padding: 1vw;
+    border-radius: 100%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #dee2e6;
+}
+
+
+.button_icon {
+    width: 2vw;
+    height: 2vw;
 }

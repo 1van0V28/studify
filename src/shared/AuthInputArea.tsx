@@ -2,15 +2,6 @@ import { ReactNode } from 'react'
 import styles from '@/app/styles/styles_shared/AuthInputArea.module.css'
 
 
-interface AuthInputAreaProps {
-    id: string
-    labelName: string,
-    error: string,
-    inputValue: string,
-    children: ReactNode,
-}
-
-
 const getStyles = function(error: string, inputValue: string) {
     if (!inputValue) {
         return styles.label
@@ -22,8 +13,15 @@ const getStyles = function(error: string, inputValue: string) {
 }
 
 
-export function AuthInputArea(props: AuthInputAreaProps) {
+export function AuthInputArea(props: {
+    id: string
+    labelName: string,
+    error: string,
+    inputValue: string,
+    children: ReactNode
+}) {
     const labelStyle = getStyles(props.error, props.inputValue)
+
     return (
         <div className={styles.container}>
             <div className={styles.container_info}>

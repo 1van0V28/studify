@@ -2,11 +2,12 @@
 
 
 * {
-  font-family: 'Roboto', serif;
   box-sizing: border-box;
   border: none;
   padding: 0;
   margin: 0;
+  font-family: 'Roboto', serif;
+  font-weight: 500;
 }
 
 

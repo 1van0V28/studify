@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react'
 import styles from '@/app/styles/styles_shared/AuthInput.module.css'
 
 
-interface HTMLProps {
+interface HTMLAuthInputProps {
     type: string,
     name: string,
     id: string,
@@ -21,7 +21,7 @@ const getStyles = function(error: string, inputValue: string) {
 
 
 export function AuthInput(props: {
-    htmlProps: HTMLProps
+    htmlProps: HTMLAuthInputProps,
     error: string,
     inputValue: string, 
     handleChange: (event: ChangeEvent<HTMLInputElement>) => void
@@ -31,8 +31,7 @@ export function AuthInput(props: {
     return (
         <input className={inputStyle}
         {...props.htmlProps}
-        onChange={props.handleChange}
-        required>
+        onChange={props.handleChange}>
         </input>
     )
 }

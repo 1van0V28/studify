@@ -1,28 +1,23 @@
-import { useState } from 'react'
+import { EventInfoFull } from '@/app/types'
+import { orderTimeMap } from '@/app/initData'
 import styles from '@/app/styles/styles_widgets/Event.module.css'
 
 
-export function Event(props: {changeEventInfo: (eventInfo: {}) => void}) {
-    const [eventState, setEventState] = useState('')
-    
+export function Event(props: {eventInfo: EventInfoFull, openEventInfo: (eventInfo: EventInfoFull) => void}) {
     const eventClick = function() {
-        props.changeEventInfo({})
+        props.openEventInfo(props.eventInfo)
     }
 
-    return (eventState === 'clear'
-    ? 
-    <div className={styles.container_clear} onClick={eventClick}>
-        <p>Можно чиллить</p>
-        <h2>5:00-22:00</h2>
-    </div>
-    :
-    <div className={styles.container_fulfilled} onClick={eventClick}>
-        <div>
-            <h2>D666</h2>
-            <p>Практика</p>
+    return (
+        <div className={styles.container} onClick={eventClick}>
+            <div>
+                <h2>{props.eventInfo.room}</h2>
+                <p>{props.eventInfo.type}</p>
+            </div>
+            <div className={styles.subject}>
+                <h3>{props.eventInfo.subject}</h3>
+            </div>
+            <h4 className={styles.time}>{orderTimeMap[props.eventInfo.order]}</h4>
         </div>
-        <h3>Ебучий матанализ</h3>
-        <p>5:00-22:00</p>
-    </div>
     )
 }

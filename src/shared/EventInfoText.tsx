@@ -1,10 +1,20 @@
+import { ChangeEvent } from 'react'
 import styles from '@/app/styles/styles_shared/EventInfoText.module.css'
 
+interface HTMLAttributesEventInfoText {
+    name: 'homework' | 'notes',
+    placeholder: string,
+    value: string
+}
 
-export function EventInfoText() {
+export function EventInfoText(props: {
+    htmlAttrs: HTMLAttributesEventInfoText,
+    handleChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
+}) {
     return (
-        <label> {/*не забыть указать for и id для textarea*/}
-            <textarea className={styles.text} placeholder='Опциональная хуйня'></textarea>
-        </label>
+        <textarea className={styles.text} 
+        {...props.htmlAttrs}
+        onChange={props.handleChange}>
+        </textarea>
     )
 }

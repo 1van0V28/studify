@@ -35,12 +35,11 @@
 }
 
 .label_error {
-    color: red;
+    color: #d00000;
 }
 
 
 .error {
     margin: 0 10% 0 0; 
-    color: red;
-    font-weight: 500;
+    color: #d00000;
 }

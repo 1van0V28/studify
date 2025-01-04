@@ -1,9 +1,14 @@
 import styles from '@/app/styles/styles_shared/AuthButton.module.css'
 
 
+export interface HTMLAuthButtonAttributes {
+    value: string,
+    form: string,
+}
+
+
 export function AuthButton(props: {
-    name: string, 
-    form: string, 
+    htmlAttributes?: HTMLAuthButtonAttributes, 
     formStatus: 'fulfilled' | 'clear'
 }) {
     return (
@@ -12,14 +17,12 @@ export function AuthButton(props: {
             ?
             <input className={styles.button_active} 
             type='submit' 
-            value={props.name}
-            form={props.form}>
+            {...props.htmlAttributes}>
             </input>
             :
             <input className={styles.button} 
             type='submit' 
-            value={props.name}
-            form={props.form}
+            {...props.htmlAttributes}
             disabled>
             </input>
             }

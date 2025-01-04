@@ -42,7 +42,7 @@ export function WeekInfo(props: {currentDate: Date}) {
     return (
         <div className={styles.container}>
             <h1>{formattedDate}</h1>
-            <p>четная</p>
+            <p className={styles.parity}>четная</p>
         </div> 
     )
 }

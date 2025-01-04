@@ -13,6 +13,6 @@
 }
 
 .button_active {
-    border-bottom-color: green;
+    border-bottom-color: #212529;
     color: #212529;
 }

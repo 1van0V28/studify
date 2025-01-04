@@ -9,7 +9,6 @@
 .label {
     margin: 0 0 5px 5px;
     color: #6c757d;
-    font-weight: 500;
 }
 
 .label:hover {
@@ -24,5 +23,4 @@
     border-radius: 10px;
     outline: 3px solid #adb5bd;
     font-size: larger;
-    font-weight: 500;
 }

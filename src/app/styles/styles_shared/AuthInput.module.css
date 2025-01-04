@@ -3,11 +3,9 @@
 .input_error {
     padding: 10px;
     width: 90%;
-    background-color: transparent;
     border-radius: 10px;
     outline: 3px solid #adb5bd;
     font-size: larger;
-    font-weight: 500;
 }
 
 .input:focus,
@@ -21,5 +19,5 @@
 }
 
 .input_error {
-    outline: 3px solid red;
+    outline: 3px solid #d00000;
 }

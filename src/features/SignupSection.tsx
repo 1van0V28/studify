@@ -42,19 +42,20 @@ export function SignupSection() {
         password_repeated: '',
     })
     const router = useRouter()
-    const errors = {
-        nickname: getNicknameErrors(inputState.nickname),
-        email: '',
-        password: getPasswordErrors(inputState.password),
-        password_repeated: getPasswordRepeatedErrors(inputState.password, inputState.password_repeated)
-    }
-    const formStatus = getFormStatus(inputState, errors)
+
     const formId = useId()
     const nickNameId = useId()
     const emailId = useId()
     const passwordId = useId()
     const password_repeatedId = useId()
 
+    const errors = {
+        nickname: getNicknameErrors(inputState.nickname),
+        email: '',
+        password: getPasswordErrors(inputState.password),
+        password_repeated: getPasswordRepeatedErrors(inputState.password, inputState.password_repeated)
+    }
+    
     const handleChange = function(event: ChangeEvent<HTMLInputElement>) {
         setInputState({...inputState, [event.target.name] : event.target.value})
     }
@@ -128,10 +129,13 @@ export function SignupSection() {
                     handleChange={handleChange} />
                 </AuthInputArea>
             </form>
-            <AuthButton 
-            name={'Зарегестрироваться'} 
-            form={formId} 
-            formStatus={formStatus} />
+            <div className={styles.container_button}>
+                <AuthButton htmlAttributes={{
+                    value: 'Зарегестрироваться',
+                    form: formId
+                }}
+                formStatus={getFormStatus(inputState, errors)} />
+            </div>
         </>
     )
 }

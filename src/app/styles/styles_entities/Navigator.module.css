@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     width: 6%;
+    background-color: #e9ecef;
 }
 
 
@@ -11,15 +12,29 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 10%; /*у остальных 10% возможно из-за выделения границ*/
-    background-color: #e9ecef;
+    height: 10%;
 }
+
+
 .container_navigator {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    row-gap: 10%;
     width: 100%;
     height: 90%;
-    background-color: #e9ecef;
+}
+
+
+.button_acc {
+    width: 3vw;
+    height: 3vw;
+    cursor: pointer;
+}
+
+
+.button_nav {
+    width: 2vw;
+    height: 2vw;
 }

@@ -1,15 +1,12 @@
+import { StatesAuth, ChangeSectionAuth } from '@/app/types'
 import styles from '@/app/styles/styles_shared/AuthNavigatorButton.module.css'
 
 
-type T = 'login' | 'signup'
-
-
 export function AuthNavigatorButton(props: {
-    name: T,
-    windowState: T,
-    changeSection: (sectionName: T) => void
+    name: StatesAuth,
+    windowState: StatesAuth,
+    changeSection: ChangeSectionAuth
 }) {
-    const buttonName = (props.name === 'login' ? 'ВХОД' : 'РЕГИСТРАЦИЯ')
     const buttonStyle = (props.name === props.windowState ? styles.button_active : styles.button)
 
     const buttonClick = function() {
@@ -17,6 +14,6 @@ export function AuthNavigatorButton(props: {
     }
 
     return (
-        <button className={buttonStyle} onClick={buttonClick}>{buttonName}</button>
+        <button className={buttonStyle} onClick={buttonClick}>{props.name}</button>
     )
 }

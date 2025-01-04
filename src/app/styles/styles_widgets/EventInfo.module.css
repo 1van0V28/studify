@@ -1,33 +1,89 @@
-.container,
-.container_hidden {
-    padding: 20px;
+.container[open] {
+    margin: auto;
     position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    width: 25%;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 #6c757d;
+}
+
+
+.button {
+    margin: 5% 0 0 5%;
+    position: absolute;
+    left: 85%;
+    width: 1em;
+    height: 1em;
+    color: #adb5bd;
+    cursor: pointer;
+}
+
+.button:active {
+    color: green;
+}
+
+
+.container_form {
+    padding: 20px;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
-    top: 25%;
-    left: 25%;
-    width: 25%;
-    min-height: 50%;
-    background-color: white;
-    border: 2px solid #04a777;
-    border-radius: 10px;
+    width: 100%;
 }
 
 
-.container_hidden {
-    display: none;
+.container_buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
 }
 
 
-.container_top {
+.container_buttons,
+.container_info {
+    padding: 0 0 0 10px;
+}
+
+
+.container_submit {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
 }
 
+.container_submit_button {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 8vh;
+}
 
-.button:active {
-    background-color: #04a777;
+
+.delete,
+.submit {
+    width: calc(80% + 10px);
+    height: 100%;
+    border-radius: 10px;
+    font-size: larger;
+}
+
+
+.delete {
+    background-color: #d00000;
+    border-color: #d00000;
+    color: white;
+    cursor: pointer;
+}
+
+
+.submit {
+    border-color: green;
+    color: green;
 }

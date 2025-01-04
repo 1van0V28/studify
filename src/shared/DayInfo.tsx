@@ -1,7 +1,10 @@
+import styles from '@/app/styles/styles_shared/DayInfo.module.css'
+
+
 const options: Intl.DateTimeFormatOptions = {
     weekday: 'long',
     day: 'numeric',
-    month: 'long',
+    month: 'short',
 }
 
 
@@ -13,13 +16,25 @@ const getFormattedTodayDate = function(date: Date) {
 }
 
 
-export function DayInfo(props: {date: Date}) {
+const getNumberLessonsMessage = function(numberLessons: number) {
+    if (numberLessons === 1) {
+        return `${numberLessons} пара`
+    } else if (numberLessons === 0 || numberLessons > 4) {
+        return `${numberLessons} пар`
+    } else {
+        return `${numberLessons} пары`
+    }
+}
+
+
+export function DayInfo(props: {date: Date, numberLessons: number}) {
     const formattedDate = getFormattedTodayDate(props.date)
+    const numberLessonsMessage = getNumberLessonsMessage(props.numberLessons)
 
     return (
         <>
             <p>{formattedDate}</p>
-            <p>6 пар</p>
+            <p className={styles.lessons}>{numberLessonsMessage}</p>
         </>
     )
 }

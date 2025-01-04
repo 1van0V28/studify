@@ -21,7 +21,6 @@ export function LoginSection() {
     })
     const router = useRouter()
     const formId = useId()
-    const formStatus = getFormStatus(inputState)
 
     const handleChange = function(event: ChangeEvent<HTMLInputElement>) {
         setInputState({...inputState, [event.target.name] : event.target.value})
@@ -46,7 +45,7 @@ export function LoginSection() {
 
     return (
         <>
-            <form className={styles.container} onSubmit={loginSubmit} id={formId} noValidate>
+            <form className={styles.container} id={formId} onSubmit={loginSubmit} noValidate>
                 <LoginInput 
                 labelName={'Email'} 
                 type={'email'} 
@@ -58,7 +57,13 @@ export function LoginSection() {
                 name={'password'}
                 handleChange={handleChange} />
             </form>
-            <AuthButton name={'Войти'} form={formId} formStatus={formStatus}/>
+            <div className={styles.container_button}>
+                <AuthButton htmlAttributes={{
+                    value: 'Войти',
+                    form: formId
+                }}
+                formStatus={getFormStatus(inputState)} />
+            </div>
         </>
     )
 }

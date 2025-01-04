@@ -1,11 +1,18 @@
 import { useState } from 'react'
+import { Timetable, EventInfoFull } from '@/app/types'
 import { WeekNavigator } from '@/features/WeekNavigator'
 import { WeekTimetableInfo } from '@/features/WeekTimetableInfo'
 import styles from '@/app/styles/styles_widgets/WeekTimetable.module.css'
 
 
-export function WeekTimetable(props: {todayDate: Date, changeEventInfo: (eventInfo: {}) => void}) {
-    const [timetableState, setTimetableState] = useState(props.todayDate) // в начале работы каждый раз будет устанавливаться текущая дата
+const initDate = new Date()
+
+
+export function WeekTimetable(props: {
+    currentTimetable: Timetable, 
+    openEventInfo: (eventInfo: EventInfoFull) => void
+}) {
+    const [timetableState, setTimetableState] = useState(initDate) // в начале работы каждый раз будет устанавливаться текущая дата
     
     const switchWeek = function(switcher: 'prev' | 'next') { // в WeekNavigator мы отображаем и меняем состояние при переключении
         const newWeek = new Date(timetableState.getTime())
@@ -19,8 +26,8 @@ export function WeekTimetable(props: {todayDate: Date, changeEventInfo: (eventIn
     
     return (
         <section className={styles.container}>
-            <WeekNavigator currentDate={timetableState} switchWeek={switchWeek}/>
-            <WeekTimetableInfo currentDate={timetableState} changeEventInfo={props.changeEventInfo}/>
+            <WeekNavigator currentDate={timetableState} switchWeek={switchWeek} />
+            <WeekTimetableInfo currentDate={timetableState} openEventInfo={props.openEventInfo} />
         </section>
     )
 }
