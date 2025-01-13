@@ -1,18 +1,64 @@
-import { EventInfoFull } from '@/app/types'
-import { orderTimeMap } from '@/app/initData'
+import { EventInfoFull, FiltersInfo, InfoCategories } from '@/app/types'
+import { nameMap, orderTimeMap } from '@/app/initData'
 import styles from '@/app/styles/styles_widgets/Event.module.css'
 
 
-export function Event(props: {eventInfo: EventInfoFull, openEventInfo: (eventInfo: EventInfoFull) => void}) {
+const eventStyleMap: {[filterKey: string]: string} = {
+    'practice': styles.container_practice_checked,
+    'lecture': styles.container_lecture_checked,
+    'test': styles.container_test_checked,
+    'project': styles.container_project_checked,
+    'colloquium': styles.container_colloquium_checked,
+    'homework': styles.container_homework_checked,
+}
+
+
+const getEventBorderStyle = function(eventInfo: EventInfoFull, currentFilters: FiltersInfo) {
+    for (let filter in currentFilters) {
+        // if (filter === 'practice' || filter === 'lecture') {
+        //     if (currentFilters[filter] && filter === eventInfo.type)
+        //         return eventStyleMap[filter]
+        // }
+        if (filter !== 'practice' && filter !== 'lecture') {
+            if (eventInfo[filter as keyof EventInfoFull] && currentFilters[filter as keyof FiltersInfo]) {
+                return eventStyleMap[filter]
+            }
+        }
+    }
+
+    return styles.container
+}
+
+
+const getEventTypeStyle = function(eventInfo: EventInfoFull, currentFilters: FiltersInfo) {
+    if (currentFilters.practice && 'practice' === eventInfo.type) {
+        return styles.type_practice_checked
+    } else if (currentFilters.lecture && 'lecture' === eventInfo.type) {
+        return styles.type_lecture_checked
+    }
+
+    return styles.type
+}
+
+
+export function Event(props: {
+    eventInfo: EventInfoFull,
+    currentFilters: FiltersInfo,
+    openEventInfo: (eventInfo: EventInfoFull) => void
+}) {
     const eventClick = function() {
         props.openEventInfo(props.eventInfo)
     }
 
+    const eventBorderStyle = getEventBorderStyle(props.eventInfo, props.currentFilters)
+    const eventTypeStyle = getEventTypeStyle(props.eventInfo, props.currentFilters)
+    const eventType = nameMap[props.eventInfo.type]
+
     return (
-        <div className={styles.container} onClick={eventClick}>
+        <div className={eventBorderStyle} onClick={eventClick}>
             <div>
                 <h2>{props.eventInfo.room}</h2>
-                <p>{props.eventInfo.type}</p>
+                <span className={eventTypeStyle}>{eventType}</span>
             </div>
             <div className={styles.subject}>
                 <h3>{props.eventInfo.subject}</h3>

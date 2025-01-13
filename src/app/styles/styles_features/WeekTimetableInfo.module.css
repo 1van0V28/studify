@@ -11,6 +11,7 @@
     display: grid;
     width: 95%;
     grid-template-columns: repeat(6, 1fr);
+    background-color: #f8f9fa;
     box-shadow: 0 5px 10px 0 #6c757d;
 }
 

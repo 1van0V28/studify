@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Timetable, EventInfoFull } from '@/app/types'
+import { Timetable, FiltersInfo, EventInfoFull } from '@/app/types'
 import { WeekNavigator } from '@/features/WeekNavigator'
 import { WeekTimetableInfo } from '@/features/WeekTimetableInfo'
 import styles from '@/app/styles/styles_widgets/WeekTimetable.module.css'
@@ -9,7 +9,9 @@ const initDate = new Date()
 
 
 export function WeekTimetable(props: {
-    currentTimetable: Timetable, 
+    currentTimetable: Timetable,
+    currentFilters: FiltersInfo
+    changeFilters: (filters: FiltersInfo) => void,
     openEventInfo: (eventInfo: EventInfoFull) => void
 }) {
     const [timetableState, setTimetableState] = useState(initDate) // в начале работы каждый раз будет устанавливаться текущая дата
@@ -26,8 +28,15 @@ export function WeekTimetable(props: {
     
     return (
         <section className={styles.container}>
-            <WeekNavigator currentDate={timetableState} switchWeek={switchWeek} />
-            <WeekTimetableInfo currentDate={timetableState} openEventInfo={props.openEventInfo} />
+            <WeekNavigator 
+            currentDate={timetableState} 
+            currentFilters={props.currentFilters}
+            changeFilters={props.changeFilters}
+            switchWeek={switchWeek} />
+            <WeekTimetableInfo 
+            currentDate={timetableState}
+            currentFilters={props.currentFilters} 
+            openEventInfo={props.openEventInfo} />
         </section>
     )
 }

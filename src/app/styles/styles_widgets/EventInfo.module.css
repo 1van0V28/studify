@@ -19,12 +19,12 @@
     left: 85%;
     width: 1em;
     height: 1em;
-    color: #adb5bd;
+    color: #ced4da;
     cursor: pointer;
 }
 
 .button:active {
-    color: green;
+    color: #57cc99;
 }
 
 
@@ -37,53 +37,15 @@
 }
 
 
-.container_buttons {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    column-gap: 1em;
-}
-
-
 .container_buttons,
 .container_info {
     padding: 0 0 0 10px;
 }
 
 
-.container_submit {
+.container_buttons {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.container_submit_button {
-    display: flex;
-    justify-content: center;
-    width: 50%;
-    height: 8vh;
-}
-
-
-.delete,
-.submit {
-    width: calc(80% + 10px);
-    height: 100%;
-    border-radius: 10px;
-    font-size: larger;
-}
-
-
-.delete {
-    background-color: #d00000;
-    border-color: #d00000;
-    color: white;
-    cursor: pointer;
-}
-
-
-.submit {
-    border-color: green;
-    color: green;
+    column-gap: 1em;
 }

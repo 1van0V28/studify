@@ -19,10 +19,20 @@
 .label_valid,
 .label_error {
     margin: 0 0 0 5px;
-    color: #6c757d;
     font-weight: 500;
 }
 
+.label {
+    color: #adb5bd;
+}
+
+.label_valid {
+    color: #57cc99;
+}
+
+.label_error {
+    color: #c9184a;
+}
 
 .label:hover,
 .label_valid:hover,
@@ -30,16 +40,8 @@
     cursor: pointer;
 }
 
-.label_valid {
-    color: green;
-}
-
-.label_error {
-    color: #d00000;
-}
-
 
 .error {
     margin: 0 10% 0 0; 
-    color: #d00000;
+    color: #c9184a;
 }

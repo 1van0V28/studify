@@ -7,12 +7,12 @@
 .input {
     width: 1.5em;
     height: 1.5em;
-    accent-color: green;
+    accent-color: black;
     cursor: pointer;
 }
 
 .input:checked + .label {
-    color: green;
+    color: black;
 }
 
 

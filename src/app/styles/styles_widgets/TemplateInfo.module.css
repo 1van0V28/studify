@@ -1,0 +1,37 @@
+.container[open] {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    width: 25%;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 #6c757d;
+}
+
+
+.button {
+    margin: 5% 0 0 5%;
+    position: absolute;
+    left: 85%;
+    width: 1em;
+    height: 1em;
+    color: #adb5bd;
+    cursor: pointer;
+}
+
+.button:active {
+    color: #57cc99;
+}
+
+
+.container_form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+}

@@ -1,14 +1,64 @@
-.container {
+.container,
+/* .container_practice_checked,
+.container_lecture_checked, */
+.container_test_checked,
+.container_project_checked,
+.container_colloquium_checked,
+.container_homework_checked {
     padding: 5%;
     display: flex;
     flex-direction: column;
     row-gap: 5px;
     width: 100%;
     height: 100%;
-    border: 2px solid black;
     border-radius: 10px;
     background-color: #f8f9fa;
     cursor: pointer;
+}
+
+.container {
+    border: 3px solid #ced4da;
+}
+
+/* .container_practice_checked {
+    border: 3px solid #FFFAA0;
+}
+
+.container_lecture_checked {
+    border: 3px solid #f3d5b5;
+} */
+
+.container_test_checked {
+    /* border: 3px solid #57cc99; */
+    border: 3px solid #80ed99;
+}
+
+.container_project_checked {
+    /* border: 3px solid #c9184a; */
+    border: 3px solid #ffb3c1;
+}
+
+.container_colloquium_checked {
+    /* border: 3px solid #0077b6; */
+    border: 3px solid #90e0ef;
+}
+
+.container_homework_checked {
+    /* border: 3px solid #5a189a; */
+    border: 3px solid #e0aaff;
+}
+
+
+.type {
+    color: #ced4da;
+}
+
+.type_practice_checked {
+    color: #FFAA33;
+}
+
+.type_lecture_checked {
+    color: #b08968;
 }
 
 

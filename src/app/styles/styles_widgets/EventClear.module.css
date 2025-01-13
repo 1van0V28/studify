@@ -6,16 +6,18 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    border: 2px solid black;
+    border: 3px solid #ced4da;
     border-radius: 10px;
-    background-color: #adb5bd;
+    background-color: #ced4da;
     cursor: pointer;
+}
+
+
+.add {
+    color: #6c757d;
 }
 
 .container:hover .add{
     color: black;
 }
 
-.add {
-    color: #6c757d;
-}

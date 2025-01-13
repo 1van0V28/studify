@@ -1,4 +1,4 @@
-import { EventInfoFull } from '@/app/types'
+import { FiltersInfo, EventInfoFull } from '@/app/types'
 import { testTodayTableData } from '@/app/testData'
 import { DayInfo } from '@/shared/DayInfo'
 import { Event } from '@/widgets/Event'
@@ -7,6 +7,7 @@ import styles from '@/app/styles/styles_widgets/TodayTimetable.module.css'
 
 
 export function TodayTimetable(props: {
+    currentFilters: FiltersInfo,
     openEventInfo: (eventInfo: EventInfoFull) => void
 }) {
     const todayDate = new Date()
@@ -19,11 +20,18 @@ export function TodayTimetable(props: {
             const eventKey = crypto.randomUUID()
             if (testTodayTableData[String(i)]) {
                 eventList.push(
-                    <Event key={eventKey} eventInfo={testTodayTableData[String(i)]} openEventInfo={props.openEventInfo} />
+                    <Event 
+                    key={eventKey} 
+                    eventInfo={testTodayTableData[String(i)]}
+                    currentFilters={props.currentFilters} 
+                    openEventInfo={props.openEventInfo} />
                 )
             } else {
                 eventList.push(
-                    <EventClear key={eventKey} eventInfo={{week: '1', day: todayDay, order: String(i)}} openEventInfo={props.openEventInfo} />
+                    <EventClear 
+                    key={eventKey} 
+                    eventInfo={{week: '1', day: todayDay, order: String(i)}} 
+                    openEventInfo={props.openEventInfo} />
                 )
             }
         }

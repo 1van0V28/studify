@@ -1,10 +1,21 @@
-.button {
+.button,
+.button_active {
     padding: 1vw;
     border-radius: 100%;
     background-color: transparent;
+    color: #6c757d;
     cursor: pointer;
 }
 
-.button:hover {
+.button {
+    color: #6c757d;
+}
+
+.button_active {
+    color: #57cc99;
+}
+
+.button:hover,
+.button_active:hover {
     background-color: #dee2e6;
 }

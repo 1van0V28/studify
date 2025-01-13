@@ -1,6 +1,7 @@
-import { useState, useId, FormEvent, ChangeEvent } from 'react'
+import { useState, useId, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { LoginInput } from '@/shared/LoginInput'
+import { AuthInputArea } from '@/shared/AuthInputArea'
+import { AuthInput } from '@/shared/AuthInput'
 import { AuthButton } from '@/shared/AuthButton'
 import styles from '@/app/styles/styles_features/LoginSection.module.css'
 
@@ -21,6 +22,8 @@ export function LoginSection() {
     })
     const router = useRouter()
     const formId = useId()
+    const emailId = useId()
+    const passwordId = useId()
 
     const handleChange = function(event: ChangeEvent<HTMLInputElement>) {
         setInputState({...inputState, [event.target.name] : event.target.value})
@@ -36,7 +39,7 @@ export function LoginSection() {
             body: JSON.stringify(formData)
         })
 
-        if (response.ok) {
+        if (response.ok) { 
             router.push('/home')
         } else {
             alert('Что-то пошло не так с входом...') // в соответствие с ошибкой необходимо сообщить о ней полльзователю
@@ -46,16 +49,29 @@ export function LoginSection() {
     return (
         <>
             <form className={styles.container} id={formId} onSubmit={loginSubmit} noValidate>
-                <LoginInput 
-                labelName={'Email'} 
-                type={'email'} 
-                name={'email'}
-                handleChange={handleChange} />
-                <LoginInput
+                <AuthInputArea
+                id={emailId}
+                labelName={'Email'}
+                error={''}
+                inputValue={inputState.email}>
+                    <AuthInput
+                    htmlProps={{type: 'email', name: 'email', id: emailId}}
+                    error={''}
+                    inputValue={inputState.email}
+                    handleChange={handleChange} />
+                </AuthInputArea>
+                
+                <AuthInputArea
+                id={passwordId}
                 labelName={'Пароль'}
-                type={'password'} 
-                name={'password'}
-                handleChange={handleChange} />
+                error={''}
+                inputValue={inputState.password}>
+                    <AuthInput
+                    htmlProps={{type: 'password', name: 'password', id: passwordId}}
+                    error={''}
+                    inputValue={inputState.password}
+                    handleChange={handleChange} />
+                </AuthInputArea>
             </form>
             <div className={styles.container_button}>
                 <AuthButton htmlAttributes={{

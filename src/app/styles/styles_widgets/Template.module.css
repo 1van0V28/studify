@@ -1,0 +1,43 @@
+.container,
+.container_chosen {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5%;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.container {
+    border: 3px solid #ced4da;
+}
+
+.container_chosen {
+    border: 3px solid #80ed99;
+}
+
+
+.text {
+    display: block;
+    width: 10vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: large;
+}
+
+
+.changer {
+    color: #adb5bd;
+}
+
+.changer:hover {
+    color: black;
+}
+
+
+.icon {
+    color: #c9184a;
+}

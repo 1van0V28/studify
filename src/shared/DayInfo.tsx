@@ -27,13 +27,13 @@ const getNumberLessonsMessage = function(numberLessons: number) {
 }
 
 
-export function DayInfo(props: {date: Date, numberLessons: number}) {
-    const formattedDate = getFormattedTodayDate(props.date)
+export function DayInfo(props: {date: Date | string, numberLessons: number}) {
+    const dayInfoDate = typeof props.date === 'string' ? props.date : getFormattedTodayDate(props.date)
     const numberLessonsMessage = getNumberLessonsMessage(props.numberLessons)
 
     return (
         <>
-            <p>{formattedDate}</p>
+            <p>{dayInfoDate}</p>
             <p className={styles.lessons}>{numberLessonsMessage}</p>
         </>
     )

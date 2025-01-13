@@ -3,15 +3,17 @@ import { orderTimeMap } from '@/app/initData'
 import styles from '@/app/styles/styles_widgets/EventClear.module.css'
 
 
-export function EventClear(props: {eventInfo: EventInfoBase, openEventInfo: (eventInfo: EventInfoFull) => void}) {
+export function EventClear(props: {
+    eventInfo: EventInfoBase, 
+    openEventInfo: (eventInfo: EventInfoFull) => void
+}) {
     const eventClick = function() {
-        const initEventInfoFull: EventInfoFull = {
+        props.openEventInfo({
             ...props.eventInfo,
             room: '',
             subject: '',
             type: '',
-        }
-        props.openEventInfo(initEventInfoFull)
+        })
     }
 
     return (

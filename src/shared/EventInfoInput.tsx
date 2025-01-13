@@ -1,9 +1,10 @@
 import { ChangeEvent } from 'react'
+import { InfoInputs } from '@/app/types'
 import styles from '@/app/styles/styles_shared/EventInfoInput.module.css'
 
 
 interface HTMLAttributesEventInfoInput {
-    name: 'room' | 'subject' | 'teacher',
+    name: InfoInputs,
     placeholder: string,
     value: string
 }

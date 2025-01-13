@@ -8,16 +8,16 @@
     font-size: larger;
 }
 
-.input:focus,
-.input_valid:focus,
-.input_error:focus {
-    outline: 3px solid #212529;
-}
-
 .input_valid {
-    outline: 3px solid green;
+    outline: 3px solid #57cc99;
 }
 
 .input_error {
-    outline: 3px solid #d00000;
+    outline: 3px solid #c9184a;
+}
+
+.input:focus,
+.input_valid:focus,
+.input_error:focus {
+    outline: 3px solid black;
 }

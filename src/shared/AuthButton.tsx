@@ -3,7 +3,7 @@ import styles from '@/app/styles/styles_shared/AuthButton.module.css'
 
 export interface HTMLAuthButtonAttributes {
     value: string,
-    form: string,
+    form?: string,
 }
 
 

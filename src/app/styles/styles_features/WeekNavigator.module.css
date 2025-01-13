@@ -2,8 +2,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 10px;
+    width: 100%;
     height: 10%;
+}
+
+
+.container_block,
+.container_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
+    height: 100%;
+}
+
+.container_block {
+    column-gap: 15%;
+}
+
+.container_info {
+    column-gap: 5%; 
 }
 
 

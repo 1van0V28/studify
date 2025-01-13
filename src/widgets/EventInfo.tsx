@@ -1,12 +1,12 @@
 import { RefObject, ChangeEvent } from 'react'
 import { EventInfoFull } from '@/app/types'
 import { orderTimeMap } from '@/app/initData'
+import ClearIcon from '@mui/icons-material/Clear'
 import { EventInfoInput } from '@/shared/EventInfoInput'
 import { EventInfoRadio } from '@/shared/EventInfoRadio'
 import { EventInfoTextBlock } from './EventInfoTextBlock'
-import { EventCategoryButton } from '@/shared/EventCategoryButton'
-import { AuthButton } from '@/shared/AuthButton'
-import ClearIcon from '@mui/icons-material/Clear'
+import { EventInfoCheckbox } from '@/shared/EventInfoCheckbox'
+import { ConfirmButtonsBlock } from './ConfirmButtonsBlock'
 import styles from '@/app/styles/styles_widgets/EventInfo.module.css'
 
 
@@ -49,25 +49,25 @@ export function EventInfo(props: {
                     htmlAttrs={{
                         name: 'room',
                         placeholder: 'Номер аудитории*', 
-                        value: (props.eventInfo.room ?? ''),
+                        value: props.eventInfo.room,
                     }}
                     handleChange={handleInputChange} />
                     <EventInfoInput 
                     htmlAttrs={{
                         name: 'subject',
                         placeholder: 'Название предмета*', 
-                        value: (props.eventInfo.subject ?? ''),
+                        value: props.eventInfo.subject,
                     }}
                     handleChange={handleInputChange} />
 
                     <div className={styles.container_buttons}>
                         <EventInfoRadio 
                         checkedRadio={props.eventInfo.type} 
-                        value={'Практика'} 
+                        value={'practice'} 
                         handleChange={handleInputChange} />
                         <EventInfoRadio 
                         checkedRadio={props.eventInfo.type} 
-                        value={'Лекция'} 
+                        value={'lecture'} 
                         handleChange={handleInputChange} />
                     </div>
 
@@ -91,28 +91,20 @@ export function EventInfo(props: {
                     handleChange={handleTextareaChange} />
 
                     <div className={styles.container_buttons} >
-                        <EventCategoryButton 
-                        name='Тест' 
-                        checked={props.eventInfo['Тест'] ?? false}
+                        <EventInfoCheckbox 
+                        name='test' 
+                        checked={props.eventInfo['test'] ?? false}
                         handleChange={handleInputChange} />
-                        <EventCategoryButton 
-                        name='Проект' 
-                        checked={props.eventInfo['Проект'] ?? false}
+                        <EventInfoCheckbox 
+                        name='project' 
+                        checked={props.eventInfo['project'] ?? false}
                         handleChange={handleInputChange} />
-                        <EventCategoryButton 
-                        name='Коллоквиум' 
-                        checked={props.eventInfo['Коллоквиум'] ?? false}
+                        <EventInfoCheckbox 
+                        name='colloquium' 
+                        checked={props.eventInfo['colloquium'] ?? false}
                         handleChange={handleInputChange} />
                     </div>
-
-                    <div className={styles.container_submit}>
-                        <div className={styles.container_submit_button}>
-                            <input className={styles.delete} type='button' value='Удалить'></input>
-                        </div>
-                        <div className={styles.container_submit_button}>
-                            <AuthButton formStatus={getEventInfoStatus(props.eventInfo)} />
-                        </div>
-                    </div>
+                    <ConfirmButtonsBlock formStatus={getEventInfoStatus(props.eventInfo)}/>
                 </form>
         </dialog>
     )

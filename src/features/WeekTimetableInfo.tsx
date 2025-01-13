@@ -1,4 +1,5 @@
-import { EventInfoFull } from '@/app/types'
+import { FiltersInfo, EventInfoFull } from '@/app/types'
+import { weekdaysMap } from '@/app/initData'
 import { testWeekTableData } from '@/app/testData'
 import { DayInfo } from '@/shared/DayInfo'
 import { Event } from '@/widgets/Event'
@@ -14,9 +15,11 @@ const getStartDate = function(currentDate: Date) {
 }
 
 
-export function WeekTimetableInfo(props: {currentDate: Date, openEventInfo: (eventInfo: EventInfoFull) => void}) {
-    const startDate = getStartDate(props.currentDate)
-
+export function WeekTimetableInfo(props: {
+    currentDate?: Date,
+    currentFilters: FiltersInfo,
+    openEventInfo: (eventInfo: EventInfoFull) => void
+}) {
     const getEventOrderList = function() {
         const eventOrder = []
         for (let i = 1; i < 9; i++) {
@@ -31,15 +34,32 @@ export function WeekTimetableInfo(props: {currentDate: Date, openEventInfo: (eve
         return eventOrder
     }
 
-    const getDayInfoList = function() {
-        const dayInfoList = []
+    const getDayInfoFullList = function() {
+        const startDate = getStartDate(props.currentDate!) // функция будет вызвана только при наличии currentDate
+        const dayInfoFullList = []
         for (let i = 0; i < 6; i++) { 
             const key = crypto.randomUUID()
             const dayInfoDate = new Date(startDate.getTime())
             dayInfoDate.setDate(dayInfoDate.getDate() + i)
-            const numberLessons = Object.keys(testWeekTableData[String(dayInfoDate.getDay())]).length
-            dayInfoList.push(
+            const numberLessons = Object.keys(testWeekTableData[String(i + 1)]).length
+            dayInfoFullList.push(
                 <div key={key} className={styles.container_dayinfo}>
+                    <DayInfo date={dayInfoDate} numberLessons={numberLessons}/>
+                </div>
+            )
+        }
+
+        return dayInfoFullList
+    }
+
+    const getDayInfoList = function() {
+        const dayInfoList = []
+        for (let i = 1; i < 7; i++) {
+            const dayInfoKey = crypto.randomUUID()
+            const dayInfoDate = weekdaysMap[String(i)]
+            const numberLessons = Object.keys(testWeekTableData[String(i)]).length
+            dayInfoList.push(
+                <div key={dayInfoKey} className={styles.container_dayinfo}>
                     <DayInfo date={dayInfoDate} numberLessons={numberLessons}/>
                 </div>
             )
@@ -56,13 +76,18 @@ export function WeekTimetableInfo(props: {currentDate: Date, openEventInfo: (eve
                 if (testWeekTableData[day][String(i)]) {
                     eventList.push(
                         <div key={eventKey} className={styles.container_event}>
-                            <Event eventInfo={testWeekTableData[day][String(i)]} openEventInfo={props.openEventInfo} />
+                            <Event 
+                            eventInfo={testWeekTableData[day][String(i)]}
+                            currentFilters={props.currentFilters} 
+                            openEventInfo={props.openEventInfo} />
                         </div>
                     )
                 } else {
                     eventList.push(
                         <div key={eventKey} className={styles.container_event}>
-                            <EventClear eventInfo={{week: '1', day: day, order: String(i)}} openEventInfo={props.openEventInfo} />
+                            <EventClear 
+                            eventInfo={{week: '1', day: day, order: String(i)}} 
+                            openEventInfo={props.openEventInfo} />
                         </div>
                     )
                 }
@@ -73,7 +98,7 @@ export function WeekTimetableInfo(props: {currentDate: Date, openEventInfo: (eve
     }
 
     const eventOrderList = getEventOrderList()
-    const dayInfoList = getDayInfoList()
+    const dayInfoList = props.currentDate ? getDayInfoFullList() : getDayInfoList()
     const eventList = getEventList()
     
     return (

@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react'
 import { EventInfoFull } from '@/app/types'
 import { initEventInfo } from '@/app/initData'
-import { Navigator } from '@/entities/Navigator'
 import { Timetable } from '@/entities/Timetable'
 import { EventInfo } from '@/widgets/EventInfo'
 
@@ -16,7 +15,6 @@ export function HomePage() {
     }
 
     const closeEventInfo = function() {
-        setEventInfoState({...eventInfoState})
         eventInfoRef.current?.close()
     }
 
@@ -26,7 +24,6 @@ export function HomePage() {
 
     return (
         <>
-            <Navigator />
             <Timetable openEventInfo={openEventInfo} />
             <EventInfo 
             eventInfoRef={eventInfoRef} 
