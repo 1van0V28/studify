@@ -1,40 +1,33 @@
-import { useState } from 'react'
-import { Timetable, FiltersInfo, EventInfoFull } from '@/app/types'
+import { Dispatch } from 'react'
+import { TimetableWeekState, TimetableWeekAction, FiltersInfo, EventInfoFull } from '@/app/types'
 import { WeekNavigator } from '@/features/WeekNavigator'
 import { WeekTimetableInfo } from '@/features/WeekTimetableInfo'
 import styles from '@/app/styles/styles_widgets/WeekTimetable.module.css'
 
 
-const initDate = new Date()
-
-
 export function WeekTimetable(props: {
-    currentTimetable: Timetable,
+    timetableWeekState: TimetableWeekState,
+    dispatch: Dispatch<TimetableWeekAction>,
     currentFilters: FiltersInfo
     changeFilters: (filters: FiltersInfo) => void,
-    openEventInfo: (eventInfo: EventInfoFull) => void
+    openEventInfo: (eventInfo: EventInfoFull, eventType: 'event' | 'event_today') => void
 }) {
-    const [timetableState, setTimetableState] = useState(initDate) // в начале работы каждый раз будет устанавливаться текущая дата
-    
-    const switchWeek = function(switcher: 'prev' | 'next') { // в WeekNavigator мы отображаем и меняем состояние при переключении
-        const newWeek = new Date(timetableState.getTime())
-        if (switcher === 'prev') {
-            newWeek.setDate(newWeek.getDate() - 7)
-        } else {
-            newWeek.setDate(newWeek.getDate() + 7)
-        }
-        setTimetableState(newWeek) // на будущее: можно переписать используя функцию-установщик состояния на основе предыдущего
+    const switchWeek = function(shift: number) {
+        props.dispatch({type: 'switch_week', shift: shift})
     }
     
     return (
         <section className={styles.container}>
             <WeekNavigator 
-            currentDate={timetableState} 
+            shift={props.timetableWeekState.shift} 
+            dispatch={props.dispatch}
             currentFilters={props.currentFilters}
-            changeFilters={props.changeFilters}
-            switchWeek={switchWeek} />
+            switchWeek={switchWeek}
+            changeFilters={props.changeFilters} />
             <WeekTimetableInfo 
-            currentDate={timetableState}
+            shift={props.timetableWeekState.shift}
+            isLoading={props.timetableWeekState.isLoading}
+            currentTimetable={props.timetableWeekState.timetable}
             currentFilters={props.currentFilters} 
             openEventInfo={props.openEventInfo} />
         </section>

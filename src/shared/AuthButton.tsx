@@ -2,6 +2,7 @@ import styles from '@/app/styles/styles_shared/AuthButton.module.css'
 
 
 export interface HTMLAuthButtonAttributes {
+    type: 'button' | 'submit'
     value: string,
     form?: string,
 }
@@ -9,19 +10,19 @@ export interface HTMLAuthButtonAttributes {
 
 export function AuthButton(props: {
     htmlAttributes?: HTMLAuthButtonAttributes, 
-    formStatus: 'fulfilled' | 'clear'
+    formStatus: 'fulfilled' | 'clear',
+    confirmChanges?: () => void,
 }) {
     return (
         <>
             {props.formStatus === 'fulfilled'
             ?
             <input className={styles.button_active} 
-            type='submit' 
+            onClick={props.confirmChanges} 
             {...props.htmlAttributes}>
             </input>
             :
             <input className={styles.button} 
-            type='submit' 
             {...props.htmlAttributes}
             disabled>
             </input>

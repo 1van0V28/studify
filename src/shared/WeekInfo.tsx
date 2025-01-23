@@ -1,13 +1,17 @@
 import styles from '@/app/styles/styles_shared/WeekInfo.module.css'
 
 
-const getWeeklyBoundaries = function(currentDate: Date) {
-    const startDate = new Date(currentDate.getTime())
-    const endDate = new Date(currentDate.getTime())
+const getWeeklyBoundaries = function(shift: number) {
+    const currentDate = new Date()
+    const currentWeek = new Date()
+    
+    currentWeek.setDate(currentDate.getDate() + 7 * shift)
 
-    const currentWeekday = currentDate.getDay()
-    startDate.setDate(startDate.getDate() + 1 - currentWeekday) // получаем дату начала недели
-    endDate.setDate(endDate.getDate() + 6 - currentWeekday) // получаем дату конца недели
+    const startDate = new Date(currentWeek.getTime())
+    const endDate = new Date(currentWeek.getTime())
+
+    startDate.setDate(startDate.getDate() + 1 - currentDate.getDay()) // получаем дату начала недели
+    endDate.setDate(endDate.getDate() + 6 - currentDate.getDay()) // получаем дату конца недели
 
     return {
         startDate: startDate,
@@ -35,8 +39,8 @@ const formatWeeklyBoundaries = function(weeklyBoundaries: {startDate: Date, endD
 }
 
 
-export function WeekInfo(props: {currentDate: Date}) {
-    const weeklyBoundaries = getWeeklyBoundaries(props.currentDate)
+export function WeekInfo(props: {shift: number}) {
+    const weeklyBoundaries = getWeeklyBoundaries(props.shift)
     const formattedDate = formatWeeklyBoundaries(weeklyBoundaries)
     
     return (

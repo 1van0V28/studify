@@ -1,26 +1,24 @@
-import { TimetableToday, Timetable, TemplateInfoFull } from './types'
+import { TimetableWeek, TimetableDay, Templates } from './types'
 
 
-export const testWeekTableData: Timetable = {
-    1: {
+export const testWeekTableData: TimetableWeek = {
+    monday: {
         1: {
-            week: '1',
-            day: '1',
+            day: 'monday',
             order: '1',
             room: 'D212',
+            date: '2025-1-20',
             subject: 'Математическая логика и теория алгоритмов',
             type: 'lecture',
             teacher: 'Черныш Елена Валерьевна',
             homework: 'Сделать ИДЗ',
-            'test': false,
-            'project': false,
             'colloquium': true,
         },
         2: {
-            week: '1',
-            day: '1',
+            day: 'monday',
             order: '2',
             room: 'D212',
+            date: '2025-1-20',
             subject: 'Программная инженерия',
             type: 'lecture',
             teacher: 'Скурский Степан Валерьевич',
@@ -29,12 +27,12 @@ export const testWeekTableData: Timetable = {
             'colloquium': false,
         },
     },
-    2: {
+    tuesday: {
         2: {
-            week: '1',
-            day: '2',
+            day: 'tuesday',
             order: '2',
             room: 'D207',
+            date: '2025-1-21',
             subject: 'Аналитическая геометрия и компьютерная графика',
             type: 'lecture',
             teacher: 'Гузев Михаил Александрович',
@@ -43,10 +41,10 @@ export const testWeekTableData: Timetable = {
             colloquium: false,
         },
         5: {
-            week: '1',
-            day: '2',
+            day: 'tuesday',
             order: '5',
             room: 'D659',
+            date: '2025-1-21',
             subject: 'Алгоритмы и структуры данных',
             type: 'practice',
             teacher: 'Малыкина Ирина Анатольевна',
@@ -55,10 +53,10 @@ export const testWeekTableData: Timetable = {
             'colloquium': false,
         },
         6: {
-            week: '1',
-            day: '2',
+            day: 'tuesday',
             order: '6',
             room: 'S',
+            date: '2025-1-21',
             subject: 'Физкультура',
             type: 'practice',
             homework: 'Написать конспект',
@@ -67,12 +65,12 @@ export const testWeekTableData: Timetable = {
             colloquium: false,
         },
     },
-    3: {
+    wednesday: {
         3: {
-            week: '1',
-            day: '3',
+            day: 'wednesday',
             order: '3',
             room: 'D447',
+            date: '2025-1-22',
             subject: 'Программная инженерия',
             type: 'practice',
             teacher: 'Скурский Степан Андреевич',
@@ -81,10 +79,10 @@ export const testWeekTableData: Timetable = {
             'colloquium': true,
         },
         4: {
-            week: '1',
-            day: '3',
+            day: 'wednesday',
             order: '4',
             room: 'D546a',
+            date: '2025-1-22',
             subject: 'Программная инженерия',
             type: 'practice',
             teacher: 'Скурский Степан Андреевич',
@@ -94,10 +92,10 @@ export const testWeekTableData: Timetable = {
     
         },
         6: {
-            week: '1',
-            day: '3',
+            day: 'wednesday',
             order: '6',
             room: 'D818',
+            date: '2025-1-22',
             subject: 'Математическая логика и теория алгоритмов',
             type: 'practice',
             teacher: 'Черныш Елена Валерьевна',
@@ -106,13 +104,13 @@ export const testWeekTableData: Timetable = {
             colloquium: false,
         },
     },
-    4: {},
-    5: {
+    thursday: {},
+    friday: {
         1: {
-            week: '1',
-            day: '5',
+            day: 'friday',
             order: '1',
             room: 'D212',
+            date: '2025-1-24',
             subject: 'Дифференциальные уравнения',
             type: 'lecture',
             teacher: 'Чеботарев Александр Юрьевич',
@@ -121,10 +119,10 @@ export const testWeekTableData: Timetable = {
             colloquium: false,
         },
         3: {
-            week: '1',
-            day: '5',
+            day: 'friday',
             order: '3',
             room: 'E236',
+            date: '2025-1-24',
             subject: 'Теория вероятности и математическая статистика',
             type: 'lecture',
             teacher: 'Тарасова Ирина Михайловна',
@@ -133,10 +131,10 @@ export const testWeekTableData: Timetable = {
             'colloquium': true,
         },
         4: {
-            week: '1',
-            day: '5',
+            day: 'friday',
             order: '4',
             room: 'D504',
+            date: '2025-1-24',
             subject: 'Теория вероятности и математическая статистика',
             type: 'practice',
             teacher: 'Тарасова Ирина Михайловна',
@@ -145,10 +143,10 @@ export const testWeekTableData: Timetable = {
             'colloquium': false,
         },
         5: {
-            week: '1',
-            day: '5',
+            day: 'friday',
             order: '5',
             room: 'D654',
+            date: '2025-1-24',
             subject: 'Алгоритмы и структуры данных',
             type: 'lecture',
             teacher: 'Малыкина Ирина Анатольевна',
@@ -157,10 +155,10 @@ export const testWeekTableData: Timetable = {
             colloquium: false,
         },
         6: {
-            week: '1',
-            day: '5',
+            day: 'friday',
             order: '6',
             room: 'S',
+            date: '2025-1-24',
             subject: 'Физкультура',
             type: 'practice',
             teacher: 'Светлана Анатольевна',
@@ -169,12 +167,12 @@ export const testWeekTableData: Timetable = {
             colloquium: false,
         },
     },
-    6: {
+    saturday: {
         1: {
-            week: '1',
-            day: '6',
+            day: 'saturday',
             order: '1',
             room: 'D738',
+            date: '2025-1-25',
             subject: 'Основы теории кодирования',
             type: 'lecture',
             teacher: 'Серга Ирина Викторовна',
@@ -183,10 +181,10 @@ export const testWeekTableData: Timetable = {
             colloquium: false,
         },
         2: {
-            week: '1',
-            day: '6',
+            day: 'saturday',
             order: '2',
             room: 'D656',
+            date: '2025-1-25',
             subject: 'Основы теории кодирования',
             type: 'practice',
             teacher: 'Серга Ирина Викторовна',
@@ -195,10 +193,10 @@ export const testWeekTableData: Timetable = {
             colloquium: false,
         },
         3: {
-            week: '1',
-            day: '6',
+            day: 'saturday',
             order: '3',
             room: 'D809',
+            date: '2025-1-25',
             subject: 'Аналитическая геометрия и компьютерная графика',
             type: 'practice',
             teacher: 'Курочкина Ирина Алексеевна',
@@ -207,10 +205,10 @@ export const testWeekTableData: Timetable = {
             colloquium: false,
         },
         4: {
-            week: '1',
-            day: '6',
+            day: 'saturday',
             order: '4',
             room: 'E715',
+            date: '2025-1-25',
             subject: 'Безопасность жизнедеятельности',
             type: 'practice',
             teacher: 'Некто Рандом',
@@ -221,12 +219,12 @@ export const testWeekTableData: Timetable = {
     },
 }
 
-export const testTodayTableData: TimetableToday = {
+export const testTodayTableData: TimetableDay = {
     1: {
-        week: '1',
-        day: '1',
+        day: 'monday',
         order: '1',
         room: 'D212',
+        date: '2025-1-22',
         subject: 'Математическая логика и теория алгоритмов',
         type: 'lecture',
         teacher: 'Черныш Елена Валерьевна',
@@ -235,10 +233,10 @@ export const testTodayTableData: TimetableToday = {
         'colloquium': true,
     },
     2: {
-        week: '1',
-        day: '1',
+        day: 'monday',
         order: '2',
         room: 'D212',
+        date: '2025-1-22',
         subject: 'Программная инженерия',
         type: 'lecture',
         teacher: 'Скурский Степан Валерьевич',
@@ -248,19 +246,29 @@ export const testTodayTableData: TimetableToday = {
     },
 }
 
-export const testTemplatesData: {[key: string]: TemplateInfoFull} = {
-    1: {
+export const testTemplatesData: Templates = {
+    'chet': {
         id: 'chet',
         name: 'Чётные страдания',
-        description: 'Данный круг ада содержит в себе дифференциальные уравнения и физику, поэтому нельзя расслаблять булки.'
+        description: 'Данный круг ада содержит в себе дифференциальные уравнения и физику, поэтому нельзя расслаблять булки.',
+        timetable: {...testWeekTableData},
     },
-    2: {
+    'nechet': {
         id: 'nechet',
         name: 'Нечётное блаженство',
-        description: 'На этой неделе можно расслабиться, ибо расписание чилловое.'
+        description: 'На этой неделе можно расслабиться, ибо расписание чилловое.',
+        timetable: {
+            monday: {},
+            tuesday: {},
+            wednesday: {},
+            thursday: {},
+            friday: {},
+            saturday: {},
+        },
     },
-    3: {
+    'test': {
         id: 'test',
         name: 'Тестовый шаблон',
+        timetable: {...testWeekTableData},
     }
 }

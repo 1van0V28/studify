@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { TemplateInfoFull, StatesWindow } from '@/app/types'
+import { useState, Dispatch } from 'react'
+import { TemplateInfoFull, TimetableWeekAction, StatesWindow } from '@/app/types'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import styles from '@/app/styles/styles_widgets/TemplateCard.module.css'
 
@@ -21,7 +21,10 @@ const getTemplateCardStyle = function(windowState: StatesWindow) {
 }
 
 
-export function TemplateCard(props: {templateInfo: TemplateInfoFull}) {
+export function TemplateCard(props: {
+    templateInfo: TemplateInfoFull,
+    dispatch: Dispatch<TimetableWeekAction>,
+}) {
     const [windowState, setWindowState] = useState<StatesWindow>('close')
     
     const templateCardClick = function() {
@@ -30,6 +33,10 @@ export function TemplateCard(props: {templateInfo: TemplateInfoFull}) {
         } else {
             setWindowState('close')
         }
+    }
+
+    const templateCardApplyClick = function() {
+        props.dispatch({type: 'apply_template', timetable: props.templateInfo.timetable})
     }
 
     const templateCardStyle = getTemplateCardStyle(windowState)
@@ -49,7 +56,7 @@ export function TemplateCard(props: {templateInfo: TemplateInfoFull}) {
                     <ArrowDropDownIcon className={styles.icon_disabled} />
                 </span>
                 }
-                <button className={styles.button}>Применить</button>
+                <button className={styles.button} onClick={templateCardApplyClick}>Применить</button>
             </div>
             <div className={templateCardStyle.window}>
                 {props.templateInfo.description}

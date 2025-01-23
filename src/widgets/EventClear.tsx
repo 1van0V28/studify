@@ -1,11 +1,12 @@
-import { EventInfoBase, EventInfoFull } from '@/app/types'
+import { EventInfoBase, ImpactObjectNames, EventInfoFull } from '@/app/types'
 import { orderTimeMap } from '@/app/initData'
 import styles from '@/app/styles/styles_widgets/EventClear.module.css'
 
 
 export function EventClear(props: {
     eventInfo: EventInfoBase, 
-    openEventInfo: (eventInfo: EventInfoFull) => void
+    eventType: ImpactObjectNames,
+    openEventInfo: (eventInfo: EventInfoFull, eventType: ImpactObjectNames) => void
 }) {
     const eventClick = function() {
         props.openEventInfo({
@@ -13,7 +14,7 @@ export function EventClear(props: {
             room: '',
             subject: '',
             type: '',
-        })
+        }, props.eventType)
     }
 
     return (

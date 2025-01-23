@@ -1,6 +1,8 @@
-import { useState, useId, ChangeEvent, FormEvent } from 'react'
+import { useState, useContext, useId, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { getNicknameErrors, getPasswordErrors, getPasswordRepeatedErrors } from './lib/validation'
+import { DataAuth } from '@/app/types'
+import { getNameErrors, getPasswordErrors, getPasswordConfirmationErrors } from './lib/validation'
+import { SetUserContext } from '@/app/context/userContext'
 import { AuthInputArea } from '@/shared/AuthInputArea'
 import { AuthInput } from '@/shared/AuthInput'
 import { AuthButton } from '@/shared/AuthButton'
@@ -8,20 +10,20 @@ import styles from '@/app/styles/styles_features/SignupSection.module.css'
 
 
 interface InputValues {
-    nickname: string,
+    name: string,
     email: string,
     password: string,
-    password_repeated: string,
+    password_confirmation: string,
 }
 
 
 const isFulfilled = function(inputValues: InputValues) {
-    return inputValues.nickname && inputValues.email && inputValues.password && inputValues.password_repeated     
+    return inputValues.name && inputValues.email && inputValues.password && inputValues.password_confirmation     
 }
 
 
 const hasErrors = function(inputErrors: InputValues) {
-    return inputErrors.nickname || inputErrors.email || inputErrors.password || inputErrors.password_repeated
+    return inputErrors.name || inputErrors.email || inputErrors.password || inputErrors.password_confirmation
 }
 
 
@@ -36,24 +38,27 @@ const getFormStatus = function(inputValues: InputValues, inputErrors: InputValue
 
 export function SignupSection() {
     const [inputState, setInputState] = useState({
-        nickname: '',
+        name: '',
         email: '',
         password: '',
-        password_repeated: '',
+        password_confirmation: '',
     })
+
+    const setUser = useContext(SetUserContext)
+
     const router = useRouter()
 
     const formId = useId()
-    const nickNameId = useId()
+    const nameId = useId()
     const emailId = useId()
     const passwordId = useId()
-    const password_repeatedId = useId()
+    const password_confirmationId = useId()
 
     const errors = {
-        nickname: getNicknameErrors(inputState.nickname),
+        name: getNameErrors(inputState.name),
         email: '',
         password: getPasswordErrors(inputState.password),
-        password_repeated: getPasswordRepeatedErrors(inputState.password, inputState.password_repeated)
+        password_confirmation: getPasswordConfirmationErrors(inputState.password, inputState.password_confirmation)
     }
     
     const handleChange = function(event: ChangeEvent<HTMLInputElement>) {
@@ -63,33 +68,30 @@ export function SignupSection() {
     const signupSubmit = async function(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        const formData = new FormData(event.currentTarget)
-        formData.delete('password_repeated')
-
-        const response = await fetch('', {
+        fetch('http://localhost:8000/register', {
             method: 'POST',
-            body: JSON.stringify(formData)
+            body: JSON.stringify(inputState)
         })
-
-        if (response.ok) {
-            router.push('/home')
-        } else {
-            alert('Что-то пошло не так с регистрацией...') // сообщить пользователю об ошибке
-        }
+            .then((response) => response.json())
+            .then((data: DataAuth) => {
+                setUser!(data.data.user)
+                router.push('/home')
+            })
+            .catch((error) => {console.log(error)})
     }
 
     return (
         <>
             <form className={styles.container} onSubmit={signupSubmit} id={formId} noValidate>
                 <AuthInputArea
-                id={nickNameId}
+                id={nameId}
                 labelName={'Никнейм'}
-                error={errors.nickname}
-                inputValue={inputState.nickname}>
+                error={errors.name}
+                inputValue={inputState.name}>
                     <AuthInput
-                    htmlProps={{type: 'text', name: 'nickname', id: nickNameId}} 
-                    error={errors.nickname}
-                    inputValue={inputState.nickname}
+                    htmlProps={{type: 'text', name: 'name', id: nameId}} 
+                    error={errors.name}
+                    inputValue={inputState.name}
                     handleChange={handleChange} />
                 </AuthInputArea>
 
@@ -118,19 +120,20 @@ export function SignupSection() {
                 </AuthInputArea>
 
                 <AuthInputArea
-                id={password_repeatedId}
+                id={password_confirmationId}
                 labelName={'Повторный пароль'}
-                error={errors.password_repeated}
-                inputValue={inputState.password_repeated}>
+                error={errors.password_confirmation}
+                inputValue={inputState.password_confirmation}>
                     <AuthInput
-                    htmlProps={{type: 'password', name: 'password_repeated', id: password_repeatedId}} 
-                    error={errors.password_repeated}
-                    inputValue={inputState.password_repeated}
+                    htmlProps={{type: 'password', name: 'password_confirmation', id: password_confirmationId}} 
+                    error={errors.password_confirmation}
+                    inputValue={inputState.password_confirmation}
                     handleChange={handleChange} />
                 </AuthInputArea>
             </form>
             <div className={styles.container_button}>
                 <AuthButton htmlAttributes={{
+                    type: 'submit',
                     value: 'Зарегестрироваться',
                     form: formId
                 }}

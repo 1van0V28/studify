@@ -1,17 +1,81 @@
-import { EventInfoFull, TemplateInfoFull, FiltersInfo, InfoTypes, InfoCategories } from './types'
+import { testWeekTableData, testTodayTableData, testTemplatesData } from './testData'
+import { 
+    Weekdays,
+    EventInfoFull, 
+    TimetableWeek,
+    TimetableWeekState,
+    TimetableTodayState,
+    TemplatesState,
+    EventInfoState,
+    TemplatesCatalogState,
+    TemplateInfoFull, 
+    FiltersInfo, 
+    InfoCategories,
+} from './types'
+
+
+export const weekdaysList: Weekdays[] = [
+    'monday', 
+    'tuesday', 
+    'wednesday', 
+    'thursday', 
+    'friday', 
+    'saturday',
+]
+
 
 export const initEventInfo: EventInfoFull = {
-    week: '',
-    day: '',
-    order: '',
+    day: 'monday',
+    order: '1',
+    date: '',
     room: '',
     subject: '',
     type: '',
 }
 
+export const initTimetableWeek: TimetableWeek = {
+    monday: {},
+    tuesday: {},
+    wednesday: {},
+    thursday: {},
+    friday: {},
+    saturday: {},
+}
+
+export const initTimetableWeekState: TimetableWeekState = {
+    timetable: {...testWeekTableData}, // initTimetableWeek
+    isLoading: false, // для отладки false
+    shift: 0,
+}
+
+export const initTimetableTodayState: TimetableTodayState = {
+    timetable: {...testTodayTableData}, // {}
+    isLoading: false, // для отладки false
+}
+
 export const initTemplateInfo: TemplateInfoFull = {
     id: '',
     name: '',
+    timetable: {...initTimetableWeek},
+}
+
+export const initTemplatesState: TemplatesState = {
+    templates: {...testTemplatesData},
+    templateInfo: {...initTemplateInfo},
+    eventInfo: {...initEventInfo},
+    isLoading: false, // для отладки false
+}
+
+export const initEventInfoState: EventInfoState = {
+    eventInfo: {...initEventInfo},
+    impactObjectName: 'event',
+    impactObjectDispatch: null,
+}
+
+export const initTemplatesCatalogState: TemplatesCatalogState = {
+    templates: {...testTemplatesData},
+    isOpen: false,
+    isLoading: false, //  для отладки false
 }
 
 export const initEventCategories: FiltersInfo = {
@@ -35,7 +99,7 @@ export const orderTimeMap: {[orderKey: string]: string} = {
     8: '20:00-21:30',
 }
 
-export const nameMap: {[nameKey in InfoCategories | InfoTypes]: string} = {
+export const nameMap: {[nameKey in InfoCategories | '']: string} = {
     practice: 'Практика',
     lecture: 'Лекция',
     test: 'Тест',
@@ -45,11 +109,11 @@ export const nameMap: {[nameKey in InfoCategories | InfoTypes]: string} = {
     '': '',
 }
 
-export const weekdaysMap: {[dayKey: string]: string}  = {
-    1: 'Понедельник',
-    2: 'Вторник',
-    3: 'Среда',
-    4: 'Четврег',
-    5: 'Пятница',
-    6: 'Суббота',
+export const weekdaysMap: {[dayKey in Weekdays]: string}  = {
+    monday: 'Понедельник',
+    tuesday: 'Вторник',
+    wednesday: 'Среда',
+    thursday: 'Четврег',
+    friday: 'Пятница',
+    saturday: 'Суббота',
 }

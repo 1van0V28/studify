@@ -1,9 +1,12 @@
-import { useState, useId, ChangeEvent, FormEvent } from 'react'
+import { useState, useContext, useId, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import { DataAuth } from '@/app/types'
+import { SetUserContext } from '@/app/context/userContext'
 import { AuthInputArea } from '@/shared/AuthInputArea'
 import { AuthInput } from '@/shared/AuthInput'
 import { AuthButton } from '@/shared/AuthButton'
 import styles from '@/app/styles/styles_features/LoginSection.module.css'
+
 
 
 const getFormStatus = function(inputValues: {email: string, password: string}) {
@@ -20,7 +23,11 @@ export function LoginSection() {
         email: '',
         password: '',
     })
+
+    const setUser = useContext(SetUserContext)
+
     const router = useRouter()
+
     const formId = useId()
     const emailId = useId()
     const passwordId = useId()
@@ -32,18 +39,16 @@ export function LoginSection() {
     const loginSubmit = async function(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        const formData = new FormData(event.currentTarget)
-
-        const response = await fetch('', {
+        fetch('http://localhost:8000/login', {
             method: 'POST',
-            body: JSON.stringify(formData)
+            body: JSON.stringify(inputState)
         })
-
-        if (response.ok) { 
-            router.push('/home')
-        } else {
-            alert('Что-то пошло не так с входом...') // в соответствие с ошибкой необходимо сообщить о ней полльзователю
-        }
+            .then((response) => response.json())
+            .then((data: DataAuth) => {
+                setUser!(data.data.user)
+                router.push('/home')
+            })
+            .catch((error) => console.log(error)) // обновление состояния об ошибке
     }
 
     return (
@@ -75,6 +80,7 @@ export function LoginSection() {
             </form>
             <div className={styles.container_button}>
                 <AuthButton htmlAttributes={{
+                    type: 'submit',
                     value: 'Войти',
                     form: formId
                 }}

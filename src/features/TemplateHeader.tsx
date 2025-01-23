@@ -1,4 +1,5 @@
-import { FiltersInfo } from '@/app/types'
+import { Dispatch } from 'react'
+import { TemplatesState, FiltersInfo, TemplatesAction, TemplateInfoFull } from '@/app/types'
 import { Filters } from './Filters'
 import { ChangesClearButton } from '@/shared/ChangesClearButton'
 import { ChangesSaveButton } from '@/shared/ChangesSaveButton'
@@ -6,10 +7,24 @@ import styles from '@/app/styles/styles_features/TemplateHeader.module.css'
 
 
 export function TemplateHeader(props: {
-    currentTemplateName: string, 
+    templatesState: TemplatesState,
+    dispatch: Dispatch<TemplatesAction>,
     currentFilters: FiltersInfo,
     changeFilters: (filters: FiltersInfo) => void
 }) {
+    const clearButtonClick = function() {
+        props.dispatch({type: 'clear_timetable'})
+    }
+
+    const saveButtonClick = async function() {
+        fetch('') // с id, потому что такое сохранение работатет только с созданными
+            .then((response) => response.json())
+            .then((templateInfo: TemplateInfoFull) => {
+                props.dispatch({type: 'save_template', templateInfo: templateInfo})
+            })
+            .catch((error) => {console.log(error)})
+    }
+
     return (
         <header className={styles.container}>
             <div className={styles.container_block}>
@@ -18,11 +33,11 @@ export function TemplateHeader(props: {
                 changeFilters={props.changeFilters} />
             </div>
             <div className={styles.container_block}>
-                <h1>{props.currentTemplateName}</h1>
+                <h1>{props.templatesState.templateInfo.name}</h1>
             </div>
             <div className={styles.container_block}>
-                <ChangesClearButton />
-                <ChangesSaveButton />
+                <ChangesClearButton clearButtonClick={clearButtonClick} />
+                <ChangesSaveButton saveButtonClick={saveButtonClick} />
             </div>
         </header>
     )

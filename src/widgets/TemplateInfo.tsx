@@ -1,9 +1,9 @@
-import { RefObject, ChangeEvent } from 'react'
+import { Dispatch, RefObject, ChangeEvent } from 'react'
 import ClearIcon from '@mui/icons-material/Clear'
-import { TemplateInfoFull } from '@/app/types'
+import { TemplateInfoFull, TemplatesAction } from '@/app/types'
 import { EventInfoInput } from '@/shared/EventInfoInput'
 import { EventInfoText } from '@/shared/EventInfoText'
-import { ConfirmButtonsBlock } from './ConfirmButtonsBlock'
+import { ConfirmButtonsBlockTemplate } from './ConfirmButtonsBlockTemplate'
 import styles from '@/app/styles/styles_widgets/TemplateInfo.module.css'
 
 
@@ -15,11 +15,13 @@ const getTemplateInfoStatus = function(name: string) {
 export function TemplateInfo(props: {
     templateInfoRef: RefObject<HTMLDialogElement>,
     templateInfo: TemplateInfoFull,
-    changeTemplateInfo: (templateInfo: TemplateInfoFull) => void,
+    dispatch: Dispatch<TemplatesAction>,
     closeTemplateInfo: () => void,
 }) {
     const handleInputChange = function(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        props.changeTemplateInfo({...props.templateInfo, [event.target.name]: event.target.value})
+        const newTemplateInfo = {...props.templateInfo, [event.target.name]: event.target.value}
+
+        props.dispatch({type: 'change_template', templateInfo: newTemplateInfo})
     }
     
     return (
@@ -40,7 +42,15 @@ export function TemplateInfo(props: {
                     value: (props.templateInfo.description ?? '')
                 }}
                 handleChange={handleInputChange} />
-                <ConfirmButtonsBlock formStatus={getTemplateInfoStatus(props.templateInfo.name)} />
+                <ConfirmButtonsBlockTemplate 
+                formStatus={getTemplateInfoStatus(props.templateInfo.name)}
+                templateInfo={props.templateInfo}
+                dispatch={props.dispatch}
+                />
+
+                {/* <ConfirmButtonsBlock 
+                formStatus={getTemplateInfoStatus(props.templateInfo.name)}
+                templateInfo={templateInfo} /> */}
             </form>
         </dialog>
     )

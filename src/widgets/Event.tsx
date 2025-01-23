@@ -1,4 +1,4 @@
-import { EventInfoFull, FiltersInfo, InfoCategories } from '@/app/types'
+import { EventInfoFull, FiltersInfo, ImpactObjectNames } from '@/app/types'
 import { nameMap, orderTimeMap } from '@/app/initData'
 import styles from '@/app/styles/styles_widgets/Event.module.css'
 
@@ -15,10 +15,6 @@ const eventStyleMap: {[filterKey: string]: string} = {
 
 const getEventBorderStyle = function(eventInfo: EventInfoFull, currentFilters: FiltersInfo) {
     for (let filter in currentFilters) {
-        // if (filter === 'practice' || filter === 'lecture') {
-        //     if (currentFilters[filter] && filter === eventInfo.type)
-        //         return eventStyleMap[filter]
-        // }
         if (filter !== 'practice' && filter !== 'lecture') {
             if (eventInfo[filter as keyof EventInfoFull] && currentFilters[filter as keyof FiltersInfo]) {
                 return eventStyleMap[filter]
@@ -44,10 +40,11 @@ const getEventTypeStyle = function(eventInfo: EventInfoFull, currentFilters: Fil
 export function Event(props: {
     eventInfo: EventInfoFull,
     currentFilters: FiltersInfo,
-    openEventInfo: (eventInfo: EventInfoFull) => void
+    eventType: ImpactObjectNames,
+    openEventInfo: (eventInfo: EventInfoFull, eventType: ImpactObjectNames) => void
 }) {
     const eventClick = function() {
-        props.openEventInfo(props.eventInfo)
+        props.openEventInfo(props.eventInfo, props.eventType)
     }
 
     const eventBorderStyle = getEventBorderStyle(props.eventInfo, props.currentFilters)

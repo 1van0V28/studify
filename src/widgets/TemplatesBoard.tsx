@@ -1,33 +1,34 @@
-import { TemplateInfoFull } from '@/app/types'
-import { testTemplatesData } from '@/app/testData'
+import { Dispatch } from 'react'
+import { TemplatesState, TemplatesAction, TemplateInfoFull } from '@/app/types'
+import { Loader } from '@/shared/Loader'
 import { AddTemplateButton } from '@/shared/AddTemplateButton'
 import { Template } from './Template'
 import styles from '@/app/styles/styles_widgets/TemplatesBoard.module.css'
 
 
 export function TemplatesBoard(props: {
-    currentTemplateId: string,
-    changeTemplateInfo: (templateInfo: TemplateInfoFull) => void,
+    templatesState: TemplatesState,
+    dispatch: Dispatch<TemplatesAction>,
     openTemplateInfo: (templateInfo: TemplateInfoFull) => void
 }) {
-    const getTemplateList = function() {
-        const templateList = []
-        for (let template in testTemplatesData) {
-            const key = crypto.randomUUID()
-            templateList.push(
+    const getTemplatesList = function() {
+        const templatesList = []
+        for (let template in props.templatesState.templates) {
+            const templateKey = crypto.randomUUID()
+            templatesList.push(
                 <Template 
-                key={key} 
-                templateInfo={testTemplatesData[template]} 
-                currentTemplateId={props.currentTemplateId}
-                changeTemplateInfo={props.changeTemplateInfo}
+                key={templateKey} 
+                templateInfo={props.templatesState.templates[template]} 
+                currentTemplateId={props.templatesState.templateInfo.id}
+                dispatch={props.dispatch}
                 openTemplateInfo={props.openTemplateInfo} />
             )
         }
 
-        return templateList
+        return templatesList
     }
 
-    const templateList = getTemplateList()
+    const templatesList = getTemplatesList()
 
     return (
         <section className={styles.container}>
@@ -35,8 +36,17 @@ export function TemplatesBoard(props: {
                 <h2>Ваши шаблоны</h2>
             </header>
             <div className={styles.container_templates}>
-                <AddTemplateButton openTemplateInfo={props.openTemplateInfo}/>
-                {templateList}
+                {props.templatesState.isLoading
+                ?
+                <div className={styles.container_loader}>
+                    <Loader />
+                </div>
+                :
+                <>
+                    <AddTemplateButton openTemplateInfo={props.openTemplateInfo}/>
+                    {templatesList}
+                </>
+                }
             </div>
         </section>
     )

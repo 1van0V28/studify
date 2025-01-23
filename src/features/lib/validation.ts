@@ -5,14 +5,14 @@ const LETTERS_NOT_LATIN = /[а-я]/i
 const SPECIALS = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
 
 
-export const getNicknameErrors = function(nickname: string) {
-    if (!nickname) {
+export const getNameErrors = function(name: string) {
+    if (!name) {
         return ''
-    } else if (nickname.length < 6) {
+    } else if (name.length < 6) {
         return 'Не менее 6 символов'
-    } else if (nickname.length > 12) {
+    } else if (name.length > 12) {
         return 'Не более 12 символов'
-    } else if (SPECIALS.test(nickname)) {
+    } else if (SPECIALS.test(name)) {
         return 'Без специальных символов'
     } else {
         return ''
@@ -43,10 +43,10 @@ export const getPasswordErrors = function(password: string) {
 }
 
 
-export const getPasswordRepeatedErrors = function(password: string, passwordRepeated: string) {
-    if (!passwordRepeated) {
+export const getPasswordConfirmationErrors = function(password: string, passwordConfirmation: string) {
+    if (!passwordConfirmation) {
         return ''
-    } else if (password !== passwordRepeated) {
+    } else if (password !== passwordConfirmation) {
         return 'Пароли не совпадают'
     } else {
         return ''
