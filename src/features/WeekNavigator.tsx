@@ -33,15 +33,16 @@ export function WeekNavigator(props: {
     }
 
     const saveButtonClick = async function() {
-        const response = await fetch(`http://localhost::8000/api/register/events/week?shift=${props.timetableWeekState.shift}`, {
-            method: 'POST',
-            body: JSON.stringify({data: props.timetableWeekState.timetable})
-        })
-        
-        if (response.ok) {
-            router.refresh()
-        } else {
-            console.log('Ошибка в сохранении изменений')
+        try {
+            const response = await fetch(`http://localhost:8000/api/register/events/week?shift=${props.timetableWeekState.shift}`, {
+                method: 'POST',
+                body: JSON.stringify({data: props.timetableWeekState.timetable})
+            })
+            if (response.ok) {
+                router.refresh()
+            }
+        } catch(error) {
+            console.log('Ошибка сохранения расписания', error)
         }
     }
 

@@ -18,25 +18,29 @@ export function AccountButton() {
     }
 
     const exitClick = async function() {
-        const response = await fetch('', {
-            method: 'POST'
-        })
-        if (response.ok) {
-            console.log('Вышел из аккаунта')
-        } else {
-            console.log('Не удалось выйти из аккаунта')
+        try {
+            const response = await fetch('http://localhost:8000/api/logout', {
+                method: 'GET'
+            })
+            if (response.ok) {
+                console.log('Вышел из аккаунта')
+            }
+        } catch(error) {
+            console.log('Ошибка выхода из аккаунта', error)
         }
     }
 
     const changeClick = async function() {
-        const response = await fetch('', {
-            method: 'POST'
-        })
-        if (response.ok) {
-            console.log('Вышел из аккаунта для смены')
-            router.push('/')
-        } else {
-            console.log('Не удалось выйти из аккаунта для смены')
+        try {
+            const response = await fetch('http://localhost:8000/api/logout', {
+                method: 'POST'
+            })
+            if (response.ok) {
+                console.log('Вышел из аккаунта для смены')
+                router.push('/')
+            }
+        } catch(error) {
+            console.log('Ошибка смены аккаунта', error)
         }
     }
 

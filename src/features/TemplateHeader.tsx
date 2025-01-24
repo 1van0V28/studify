@@ -17,12 +17,12 @@ export function TemplateHeader(props: {
     }
 
     const saveButtonClick = async function() {
-        fetch(`http://localhost::8000/api/week-templates/${props.templatesState.templateInfo.id}`) // с id, потому что такое сохранение работатет только с созданными
+        fetch(`http://localhost:8000/api/week-templates/${props.templatesState.templateInfo.id}`) // с id, потому что такое сохранение работатет только с созданными
             .then((response) => response.json())
             .then((templateInfo: TemplateInfoFull) => {
                 props.dispatch({type: 'save_template', templateInfo: templateInfo})
             })
-            .catch((error) => {console.log(error)})
+            .catch((error) => {console.log('Ошибка обновления шаблона', error)})
     }
 
     return (

@@ -12,20 +12,3 @@
     width: 50%;
     height: 8vh;
 }
-
-
-.delete,
-.submit {
-    width: calc(80% + 10px);
-    height: 100%;
-    border-radius: 10px;
-    font-size: larger;
-}
-
-
-.delete {
-    background-color: #c9184a;
-    border-color: #c9184a;
-    color: white;
-    cursor: pointer;
-}

@@ -131,37 +131,37 @@ export function HomePage() {
         setEventInfoState({...eventInfoState, eventInfo: eventInfo})
     }
 
-    // useEffect(() => {
-    //     let ignore = false
-    //     timetableWeekDispatch({type: 'fetch_timetable'})
-    //     fetch(`http://localhost::8000/api/events/week?shift=${timetableWeekState.shift}`, {
-    //         method: 'GET',
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data: DataWeek) => {
-    //             if (!ignore) {
-    //                 timetableWeekDispatch({type: 'apply_timetable', timetable: data.data.week})
-    //             }
-    //         })
-    //         .catch((error) => {console.log(error)})
+    useEffect(() => {
+        let ignore = false
+        timetableWeekDispatch({type: 'fetch_timetable'})
+        fetch(`http://localhost:8000/api/events/week?shift=${timetableWeekState.shift}`, {
+            method: 'GET',
+        })
+            .then((response) => response.json())
+            .then((data: DataWeek) => {
+                if (!ignore) {
+                    timetableWeekDispatch({type: 'apply_timetable', timetable: data.data.week})
+                }
+            })
+            .catch((error) => {console.log('Ошибка получения расписания на неделю', error)})
 
-    //     return () => {
-    //         ignore = true
-    //     }
-    // }, [timetableWeekState.shift])
+        return () => {
+            ignore = true
+        }
+    }, [timetableWeekState.shift])
 
 
-    // useEffect(() => {
-    //     fetch('http://localhost::8000/api/events/week?shift=0', {
-    //         method: 'GET',
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data: DataWeek) => {
-    //             const todayDay = new Date().toLocaleDateString('en-US', {weekday: 'long'}) as Weekdays
-    //             timetableTodayDispatch({type: 'apply_timetable', timetable: data.data.week[todayDay]})
-    //         })
-    //         .catch((error) => {console.log(error)})
-    // }, [])
+    useEffect(() => {
+        fetch('http://localhost:8000/api/events/week?shift=0', {
+            method: 'GET',
+        })
+            .then((response) => response.json())
+            .then((data: DataWeek) => {
+                const todayDay = new Date().toLocaleDateString('en-US', {weekday: 'long'}) as Weekdays
+                timetableTodayDispatch({type: 'apply_timetable', timetable: data.data.week[todayDay]})
+            })
+            .catch((error) => {console.log('Ошибка получения расписания на сегодня', error)})
+    }, [])
 
     return (
         <>

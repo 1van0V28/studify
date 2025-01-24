@@ -10,6 +10,19 @@
     background-color: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 #6c757d;
+    animation-name: show;
+    animation-duration: 0.25s;
+}
+
+@keyframes show {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 

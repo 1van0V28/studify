@@ -49,7 +49,7 @@ export function TemplatesCatalog(props: {dispatch: Dispatch<TimetableWeekAction>
     }
 
     useEffect(() => {
-        fetch('http://localhost::8000/api/week-templates', {
+        fetch('http://localhost:8000/api/week-templates', {
             method: 'GET',
         })
             .then((response) => response.json())
@@ -60,7 +60,7 @@ export function TemplatesCatalog(props: {dispatch: Dispatch<TimetableWeekAction>
                         isLoading: false,
                     })
             })
-            .catch((error) => {console.log(error)})
+            .catch((error) => {console.log('Ошибка получения каталога шаблонов', error)})
     }, [])
 
     const templateCardList = getTemplateCardList()

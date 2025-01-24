@@ -11,28 +11,29 @@ export function ConfirmButtonsBlockTemplate(props: {
     dispatch: Dispatch<TemplatesAction>
 }) {
     const deleteButtonClick = async function() {
-        const response = await fetch(`http://localhost::8000/api/week-templates/${props.templateInfo.id}`, {
-            method: 'DELETE',
-        })
-
-        if (response.ok) {
-            props.dispatch({type: 'delete_template', templateInfo: props.templateInfo})
-        } else {
-            console.log('Ошибка с удалением шаблона')
+        try {
+            const response = await fetch(`http://localhost:8000/api/week-templates/${props.templateInfo.id}`, {
+                method: 'DELETE',
+            })
+            if (response.ok) {
+                props.dispatch({type: 'delete_template', templateInfo: props.templateInfo})
+            } 
+        } catch(error) {
+            console.log('Ошибка удаления шаблона', error)
         }
     }
 
     const confirmButtonClick = async function() {
-        fetch(`http://localhost::8000/api/week-templates/${props.templateInfo.id ?? ''}`, {
+        fetch(`http://localhost:8000/api/week-templates/${props.templateInfo.id ?? ''}`, {
             method: props.templateInfo.id ? 'PATCH' : 'POST'
         })
             .then((response) => response.json())
             .then((templateInfo: TemplateInfoFull) => {
                 props.dispatch({type: 'save_template', templateInfo: templateInfo})
             })
-            .catch((error) => {console.log(error)})
-
+            .catch((error) => {console.log('Ошибка сохранения шаблона', error)})
     }
+
     return (
         <div className={styles.container_submit}>
             <div className={styles.container_submit_button}>

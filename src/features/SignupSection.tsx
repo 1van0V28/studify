@@ -74,7 +74,7 @@ export function SignupSection() {
     const signupSubmit = async function(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        fetch('http://localhost::8000/api/register', {
+        fetch('http://localhost:8000/api/register', {
             method: 'POST',
             body: JSON.stringify(inputState)
         })
@@ -83,7 +83,7 @@ export function SignupSection() {
                 setUser!(data.data.user)
                 router.push('/home')
             })
-            .catch((error) => {console.log(error)})
+            .catch((error) => {console.log('Ошибка регистрации', error)})
     }
 
     return (

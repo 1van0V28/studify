@@ -1,4 +1,3 @@
-import { testWeekTableData, testTodayTableData, testTemplatesData } from './testData'
 import { 
     Weekdays,
     EventInfoFull, 
@@ -43,14 +42,14 @@ export const initTimetableWeek: TimetableWeek = {
 }
 
 export const initTimetableWeekState: TimetableWeekState = {
-    timetable: {...testWeekTableData}, // initTimetableWeek
-    isLoading: false, // для отладки false
+    timetable: {...initTimetableWeek},
+    isLoading: true, // для отладки false
     shift: 0,
 }
 
 export const initTimetableTodayState: TimetableTodayState = {
-    timetable: {...testTodayTableData}, // {}
-    isLoading: false, // для отладки false
+    timetable: {},
+    isLoading: true, // для отладки false
 }
 
 export const initTemplateInfo: TemplateInfoFull = {
@@ -60,7 +59,7 @@ export const initTemplateInfo: TemplateInfoFull = {
 }
 
 export const initTemplatesState: TemplatesState = {
-    templates: {...testTemplatesData},
+    templates: {},
     templateInfo: {...initTemplateInfo},
     eventInfo: {...initEventInfo},
     isLoading: true, // для отладки false
@@ -73,7 +72,7 @@ export const initEventInfoState: EventInfoState = {
 }
 
 export const initTemplatesCatalogState: TemplatesCatalogState = {
-    templates: {...testTemplatesData},
+    templates: {},
     isOpen: false,
     isLoading: true, //  для отладки false
 }

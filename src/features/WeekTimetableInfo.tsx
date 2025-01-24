@@ -1,22 +1,11 @@
 import { FiltersInfo, EventInfoFull, TimetableWeek } from '@/app/types'
+import { getStartDate } from '@/app/lib/date'
 import { weekdaysList, weekdaysMap } from '@/app/initData'
 import { DayInfo } from '@/shared/DayInfo'
 import { Event } from '@/widgets/Event'
 import { EventClear } from '@/widgets/EventClear'
 import { Loader } from '@/shared/Loader'
 import styles from '@/app/styles/styles_features/WeekTimetableInfo.module.css'
-
-
-const getStartDate = function(shift: number) {
-    const currentDate = new Date()
-    const currentWeek = new Date()
-    
-    currentWeek.setDate(currentDate.getDate() + 7 * shift)
-    const startDate = new Date(currentWeek.getTime())
-    startDate.setDate(startDate.getDate() + 1 - currentDate.getDay())
-
-    return startDate
-}
 
 
 export function WeekTimetableInfo(props: {

@@ -15,17 +15,18 @@ export function ConfirmButtonsBlockEvent(props: {
                 eventInfo: props.eventInfoState.eventInfo
             })
         } else if (props.eventInfoState.impactObjectName === 'event_today') {
-            const response = await fetch(`http://localhost::8000/api/events/${props.eventInfoState.eventInfo.id}`, {
-                method: 'DELETE'
-            })
-
-            if (response.ok) {
-                props.eventInfoState.impactObjectDispatch!({
-                    type: 'delete_event', 
-                    eventInfo: props.eventInfoState.eventInfo
+            try {
+                const response = await fetch(`http://localhost:8000/api/events/${props.eventInfoState.eventInfo.id}`, {
+                    method: 'DELETE'
                 })
-            } else {
-                console.log('Ошибка удаления')
+                if (response.ok) {
+                    props.eventInfoState.impactObjectDispatch!({
+                        type: 'delete_event', 
+                        eventInfo: props.eventInfoState.eventInfo
+                    })
+                }
+            } catch(error) {
+                console.log('Ошибка удаления события на сегодня', error)
             }
         }
     }
@@ -34,12 +35,12 @@ export function ConfirmButtonsBlockEvent(props: {
         if (props.eventInfoState.impactObjectName === 'event') {
             props.eventInfoState.impactObjectDispatch!({type: 'save_event', eventInfo: props.eventInfoState.eventInfo})
         } else if (props.eventInfoState.impactObjectName === 'event_today') {
-            fetch(`http://localhost::8000/api/events/${props.eventInfoState.eventInfo.id ?? ''}`) // при наличии происходит обновление, при отсутствии - создание нового
+            fetch(`http://localhost:8000/api/events/${props.eventInfoState.eventInfo.id ?? ''}`) // при наличии происходит обновление, при отсутствии - создание нового
                 .then((response) => response.json())
                 .then((data: DataEvent) => {
                     props.eventInfoState.impactObjectDispatch!({type: 'save_event', eventInfo: data.data.event})
                 })
-                .catch((error) => {console.log(error)})
+                .catch((error) => {console.log('Ошибка сохранения события на сегодня', error)})
         }
     }
 

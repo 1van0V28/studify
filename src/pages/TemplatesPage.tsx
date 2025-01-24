@@ -89,14 +89,14 @@ export function TemplatesPage() {
     }
 
     useEffect(() => {
-        fetch('http://localhost::8000/api/week-templates', {
+        fetch('http://localhost:8000/api/week-templates', {
             method: 'GET'
         })
             .then((response) => response.json())
             .then((data: DataTemplates) => {
                 dispatch({type: 'apply_templates', templates: data.data})
             })
-            .catch((error) => {console.log(error)})
+            .catch((error) => {console.log('Ошибка получения шаблонов', error)})
     }, [])
 
     return (

@@ -13,6 +13,7 @@
     width: 3vw !important;
     height: 3vw !important;
     color: #6c757d;
+    transition: color 0.25s;
 }
 
 .button:hover .button_icon {

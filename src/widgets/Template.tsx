@@ -27,12 +27,15 @@ export function Template(props: {
     }
 
     const deleteClick = async function() {
-        const response = await fetch('', {
-            method: 'DELETE',
-        })
-
-        if (response.ok) {
-            props.dispatch({type: 'delete_template', templateInfo: props.templateInfo})
+        try {
+            const response = await fetch(`http://localhost:8000/api/week-templates/${props.templateInfo.id}`, {
+                method: 'DELETE',
+            })
+            if (response.ok) {
+                props.dispatch({type: 'delete_template', templateInfo: props.templateInfo})
+            } 
+        } catch(error) {
+            console.log('Ошибка удаления шаблона', error)
         }
     }
 
