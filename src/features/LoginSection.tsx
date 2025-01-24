@@ -41,6 +41,10 @@ export function LoginSection() {
 
         fetch('http://localhost:8000/api/login', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
             body: JSON.stringify(inputState)
         })
             .then((response) => response.json())

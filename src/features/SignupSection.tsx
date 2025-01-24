@@ -76,6 +76,10 @@ export function SignupSection() {
 
         fetch('http://localhost:8000/api/register', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
             body: JSON.stringify(inputState)
         })
             .then((response) => response.json())

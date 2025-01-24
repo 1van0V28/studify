@@ -14,6 +14,10 @@ export function ConfirmButtonsBlockTemplate(props: {
         try {
             const response = await fetch(`http://localhost:8000/api/week-templates/${props.templateInfo.id}`, {
                 method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
             })
             if (response.ok) {
                 props.dispatch({type: 'delete_template', templateInfo: props.templateInfo})
@@ -25,7 +29,12 @@ export function ConfirmButtonsBlockTemplate(props: {
 
     const confirmButtonClick = async function() {
         fetch(`http://localhost:8000/api/week-templates/${props.templateInfo.id ?? ''}`, {
-            method: props.templateInfo.id ? 'PATCH' : 'POST'
+            method: (props.templateInfo.id ? 'PATCH' : 'POST'),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(props.templateInfo)
         })
             .then((response) => response.json())
             .then((templateInfo: TemplateInfoFull) => {

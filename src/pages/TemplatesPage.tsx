@@ -90,7 +90,11 @@ export function TemplatesPage() {
 
     useEffect(() => {
         fetch('http://localhost:8000/api/week-templates', {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
         })
             .then((response) => response.json())
             .then((data: DataTemplates) => {

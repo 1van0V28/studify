@@ -30,6 +30,10 @@ export function Template(props: {
         try {
             const response = await fetch(`http://localhost:8000/api/week-templates/${props.templateInfo.id}`, {
                 method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
             })
             if (response.ok) {
                 props.dispatch({type: 'delete_template', templateInfo: props.templateInfo})

@@ -20,7 +20,11 @@ export function AccountButton() {
     const exitClick = async function() {
         try {
             const response = await fetch('http://localhost:8000/api/logout', {
-                method: 'GET'
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
             })
             if (response.ok) {
                 console.log('Вышел из аккаунта')
@@ -33,7 +37,11 @@ export function AccountButton() {
     const changeClick = async function() {
         try {
             const response = await fetch('http://localhost:8000/api/logout', {
-                method: 'POST'
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
             })
             if (response.ok) {
                 console.log('Вышел из аккаунта для смены')

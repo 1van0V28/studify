@@ -36,6 +36,10 @@ export function WeekNavigator(props: {
         try {
             const response = await fetch(`http://localhost:8000/api/register/events/week?shift=${props.timetableWeekState.shift}`, {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
                 body: JSON.stringify({data: props.timetableWeekState.timetable})
             })
             if (response.ok) {
