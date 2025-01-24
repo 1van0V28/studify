@@ -47,10 +47,6 @@ export function TemplateInfo(props: {
                 templateInfo={props.templateInfo}
                 dispatch={props.dispatch}
                 />
-
-                {/* <ConfirmButtonsBlock 
-                formStatus={getTemplateInfoStatus(props.templateInfo.name)}
-                templateInfo={templateInfo} /> */}
             </form>
         </dialog>
     )

@@ -1,5 +1,5 @@
-import { useReducer, useState, useRef } from 'react'
-import { TemplatesState, TemplatesAction, EventInfoState, EventInfoFull, TemplateInfoFull } from '@/app/types'
+import { useReducer, useState, useRef, useEffect } from 'react'
+import { TemplatesState, TemplatesAction, EventInfoState, EventInfoFull, TemplateInfoFull, DataTemplates } from '@/app/types'
 import { initTemplatesState, initTimetableWeek, initEventInfo } from '@/app/initData'
 import { Templates } from '@/entities/Templates'
 import { TemplateInfo } from '@/widgets/TemplateInfo'
@@ -20,7 +20,7 @@ const templatesReducer = function(templatesState: TemplatesState, action: Templa
 
         return newTemplatesState
     } else if (action.type === 'delete_event') {
-        const day = action.eventInfo!.day // eventInfo передать через action
+        const day = action.eventInfo!.day
         const order = action.eventInfo!.order
         const newTemplatesState = {...templatesState}
 
@@ -28,7 +28,7 @@ const templatesReducer = function(templatesState: TemplatesState, action: Templa
 
         return newTemplatesState
     } else if (action.type === 'save_event') {
-        const day = action.eventInfo!.day // eventInfo передать через action
+        const day = action.eventInfo!.day
         const order = action.eventInfo!.order
         const newTemplatesState = {...templatesState}
 
@@ -45,6 +45,11 @@ const templatesReducer = function(templatesState: TemplatesState, action: Templa
         newTemplatesState.templateInfo.timetable = {...initTimetableWeek}
 
         return newTemplatesState
+    } else if (action.type === 'apply_templates') {
+        return {...templatesState, 
+            templates: {...action.templates!},
+            isLoading: false,
+        }
     } else {
         throw Error(`Uknown action: ${action.type}`)
     }
@@ -54,7 +59,7 @@ const templatesReducer = function(templatesState: TemplatesState, action: Templa
 export function TemplatesPage() {
     const [templatesState, dispatch] = useReducer(templatesReducer, initTemplatesState)
     const [eventInfoState, setEventInfoState] = useState<EventInfoState>({
-        eventInfo: {...initEventInfo},
+        eventInfo: initEventInfo,
         impactObjectName: 'event',
         impactObjectDispatch: dispatch,
     })
@@ -82,6 +87,17 @@ export function TemplatesPage() {
     const closeEventInfo = function() {
         eventInfoRef.current?.close()
     }
+
+    useEffect(() => {
+        fetch('http://localhost::8000/api/week-templates', {
+            method: 'GET'
+        })
+            .then((response) => response.json())
+            .then((data: DataTemplates) => {
+                dispatch({type: 'apply_templates', templates: data.data})
+            })
+            .catch((error) => {console.log(error)})
+    }, [])
 
     return (
         <>

@@ -1,7 +1,6 @@
 import { useState, Dispatch, useEffect } from 'react'
-import { TimetableWeekAction, Templates } from '@/app/types'
+import { TimetableWeekAction, DataTemplates } from '@/app/types'
 import { initTemplatesCatalogState } from '@/app/initData'
-import { testTemplatesData } from '@/app/testData'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { TemplateCard } from '@/widgets/TemplateCard'
 import { Loader } from '@/shared/Loader'
@@ -24,24 +23,24 @@ const getTemplatesCatalogStyle = function(isOpen: boolean) {
 
 
 export function TemplatesCatalog(props: {dispatch: Dispatch<TimetableWeekAction>}) {
-    const [templateCatalogState, setTemplateCatalogState] = useState(initTemplatesCatalogState)
+    const [templatesCatalogState, setTemplatesCatalogState] = useState(initTemplatesCatalogState)
 
     const templatesCatalogClick = function() {
-        if (templateCatalogState.isOpen) {
-            setTemplateCatalogState({...templateCatalogState, isOpen: false})
+        if (templatesCatalogState.isOpen) {
+            setTemplatesCatalogState({...templatesCatalogState, isOpen: false})
         } else {
-            setTemplateCatalogState({...templateCatalogState, isOpen: true})
+            setTemplatesCatalogState({...templatesCatalogState, isOpen: true})
         }
     }
 
     const getTemplateCardList = function() {
         const templateCardList = []
-        for (let template in templateCatalogState) {
+        for (let template in templatesCatalogState.templates) {
             const templateKey = crypto.randomUUID()
             templateCardList.push(
                 <TemplateCard 
                 key={templateKey} 
-                templateInfo={testTemplatesData[template]}
+                templateInfo={templatesCatalogState.templates[template]}
                 dispatch={props.dispatch} />
             )
         }
@@ -50,12 +49,14 @@ export function TemplatesCatalog(props: {dispatch: Dispatch<TimetableWeekAction>
     }
 
     useEffect(() => {
-        fetch('')
+        fetch('http://localhost::8000/api/week-templates', {
+            method: 'GET',
+        })
             .then((response) => response.json())
-            .then((templates: Templates) => {
-                    setTemplateCatalogState({
-                        ...templateCatalogState,
-                        templates: templates,
+            .then((data: DataTemplates) => {
+                    setTemplatesCatalogState({
+                        ...templatesCatalogState,
+                        templates: data.data,
                         isLoading: false,
                     })
             })
@@ -63,7 +64,7 @@ export function TemplatesCatalog(props: {dispatch: Dispatch<TimetableWeekAction>
     }, [])
 
     const templateCardList = getTemplateCardList()
-    const templatesCatalogStyle = getTemplatesCatalogStyle(templateCatalogState.isOpen)
+    const templatesCatalogStyle = getTemplatesCatalogStyle(templatesCatalogState.isOpen)
 
     return (
         <div>
@@ -72,7 +73,7 @@ export function TemplatesCatalog(props: {dispatch: Dispatch<TimetableWeekAction>
                 <ArrowDropDownIcon className={templatesCatalogStyle.icon} />
             </div>
             <ul className={templatesCatalogStyle.window}>
-                {true
+                {templatesCatalogState.isLoading
                 ?
                 <div className={styles.container_loader}>
                     <Loader />

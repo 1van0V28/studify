@@ -26,7 +26,7 @@ export const weekdaysList: Weekdays[] = [
 
 export const initEventInfo: EventInfoFull = {
     day: 'monday',
-    order: '1',
+    order: '',
     date: '',
     room: '',
     subject: '',
@@ -63,7 +63,7 @@ export const initTemplatesState: TemplatesState = {
     templates: {...testTemplatesData},
     templateInfo: {...initTemplateInfo},
     eventInfo: {...initEventInfo},
-    isLoading: false, // для отладки false
+    isLoading: true, // для отладки false
 }
 
 export const initEventInfoState: EventInfoState = {
@@ -75,7 +75,7 @@ export const initEventInfoState: EventInfoState = {
 export const initTemplatesCatalogState: TemplatesCatalogState = {
     templates: {...testTemplatesData},
     isOpen: false,
-    isLoading: false, //  для отладки false
+    isLoading: true, //  для отладки false
 }
 
 export const initEventCategories: FiltersInfo = {

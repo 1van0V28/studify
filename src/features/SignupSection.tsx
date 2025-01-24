@@ -1,7 +1,7 @@
 import { useState, useContext, useId, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { DataAuth } from '@/app/types'
-import { getNameErrors, getPasswordErrors, getPasswordConfirmationErrors } from './lib/validation'
+import { getNameErrors, getPasswordErrors, getPasswordConfirmationErrors } from '../app/lib/validation'
 import { SetUserContext } from '@/app/context/userContext'
 import { AuthInputArea } from '@/shared/AuthInputArea'
 import { AuthInput } from '@/shared/AuthInput'
@@ -18,12 +18,18 @@ interface InputValues {
 
 
 const isFulfilled = function(inputValues: InputValues) {
-    return inputValues.name && inputValues.email && inputValues.password && inputValues.password_confirmation     
+    return inputValues.name 
+        && inputValues.email 
+        && inputValues.password 
+        && inputValues.password_confirmation     
 }
 
 
 const hasErrors = function(inputErrors: InputValues) {
-    return inputErrors.name || inputErrors.email || inputErrors.password || inputErrors.password_confirmation
+    return inputErrors.name 
+        || inputErrors.email 
+        || inputErrors.password 
+        || inputErrors.password_confirmation
 }
 
 
@@ -68,7 +74,7 @@ export function SignupSection() {
     const signupSubmit = async function(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        fetch('http://localhost:8000/register', {
+        fetch('http://localhost::8000/api/register', {
             method: 'POST',
             body: JSON.stringify(inputState)
         })

@@ -5,12 +5,36 @@ import {
     TimetableTodayState, 
     TimetableTodayAction,
     EventInfoFull, 
-    TimetableWeek, 
+    DataWeek,
     Weekdays
 } from '@/app/types'
+import { getStartDate } from '@/app/lib/date'
 import { initTimetableWeek, initTimetableWeekState, initTimetableTodayState, initEventInfoState } from '@/app/initData'
 import { Timetable } from '@/entities/Timetable'
 import { EventInfo } from '@/widgets/EventInfo'
+
+
+const getformattedTimetableWeekState = function(
+    shift: number, 
+    timetableWeekState: TimetableWeekState, 
+    action: TimetableWeekAction
+) {
+    const startDate = getStartDate(shift)
+    const newTimetableWeekState = {...timetableWeekState, timetable: {...action.timetable!}}
+
+    for (let weekday in newTimetableWeekState.timetable) {
+        for (let i = 1; i < 9; i++) {
+            if (newTimetableWeekState.timetable[weekday as Weekdays][String(i)]) {
+                const weekdayDate = new Date(startDate.getTime())
+                weekdayDate.setDate(weekdayDate.getDate() + i)
+                const date = weekdayDate.toLocaleDateString('zh-Hans-CN').replace(/[^apm\d]+/gi, '-')
+                newTimetableWeekState.timetable[weekday as Weekdays][String(i)].date = date
+            }
+        }
+    }
+
+    return newTimetableWeekState
+} 
 
 
 const timetableWeekReducer = function(timetableWeekState: TimetableWeekState, action: TimetableWeekAction) {
@@ -30,8 +54,10 @@ const timetableWeekReducer = function(timetableWeekState: TimetableWeekState, ac
         newTimetableWeekState.timetable[day][order] = {...action.eventInfo!}
 
         return newTimetableWeekState
-    } else if (action.type === 'apply_template') { // нужно заменить даты или использовать применение через запрос
-        return {...timetableWeekState, timetable: {...action.timetable!}}
+    } else if (action.type === 'apply_template') {
+        const newTimetableWeekState = getformattedTimetableWeekState(timetableWeekState.shift, timetableWeekState, action)
+
+        return newTimetableWeekState
     } else if (action.type === 'clear_timetable') {
         return {...timetableWeekState, timetable: {...initTimetableWeek}}
     } else if (action.type === 'switch_week') {
@@ -43,7 +69,7 @@ const timetableWeekReducer = function(timetableWeekState: TimetableWeekState, ac
     } else if (action.type === 'apply_timetable') {
         return {...timetableWeekState,
             timetable: {...action.timetable!},
-            isLoading: false
+            isLoading: false,
         }
     } else {
         throw Error(`Uknown action: ${action.type}`)
@@ -59,9 +85,12 @@ const timetableTodayReducer = function(timetableTodayState: TimetableTodayState,
 
         return newTimetableTodayState
     } else if (action.type === 'save_event') {
-        return {...timetableTodayState, [action.eventInfo!.order]: action.eventInfo}
+        return {...timetableTodayState, [action.eventInfo!.order]: {...action.eventInfo!}}
     } else if (action.type === 'apply_timetable') {
-        return {...timetableTodayState, timetable: action.timetable!}
+        return {...timetableTodayState, 
+            timetable: {...action.timetable!},
+            isLoading: false,
+        }
     } else {
         throw Error(`Uknown action: ${action.type}`)
     }
@@ -105,11 +134,13 @@ export function HomePage() {
     // useEffect(() => {
     //     let ignore = false
     //     timetableWeekDispatch({type: 'fetch_timetable'})
-    //     fetch('')
+    //     fetch(`http://localhost::8000/api/events/week?shift=${timetableWeekState.shift}`, {
+    //         method: 'GET',
+    //     })
     //         .then((response) => response.json())
-    //         .then((result: TimetableWeek) => {
+    //         .then((data: DataWeek) => {
     //             if (!ignore) {
-    //                 timetableWeekDispatch({type: 'apply_timetable', timetable: result})
+    //                 timetableWeekDispatch({type: 'apply_timetable', timetable: data.data.week})
     //             }
     //         })
     //         .catch((error) => {console.log(error)})
@@ -121,13 +152,15 @@ export function HomePage() {
 
 
     // useEffect(() => {
-    //     fetch('')
+    //     fetch('http://localhost::8000/api/events/week?shift=0', {
+    //         method: 'GET',
+    //     })
     //         .then((response) => response.json())
-    //         .then((result: TimetableWeek) => {
+    //         .then((data: DataWeek) => {
     //             const todayDay = new Date().toLocaleDateString('en-US', {weekday: 'long'}) as Weekdays
-    //             timetableTodayDispatch({type: 'apply_timetable', timetable: result[todayDay]})
+    //             timetableTodayDispatch({type: 'apply_timetable', timetable: data.data.week[todayDay]})
     //         })
-    //         .catch((error) => console.log(error))
+    //         .catch((error) => {console.log(error)})
     // }, [])
 
     return (

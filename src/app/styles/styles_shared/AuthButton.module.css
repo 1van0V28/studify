@@ -4,6 +4,7 @@
     height: 100%;
     border-radius: 10px;
     font-size: larger;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .button {
@@ -16,4 +17,9 @@
     background-color: #57cc99;
     color: #f8f9fa;
     cursor: pointer;
+}
+
+.button_active:active {
+    transition: background-color 0.1s;
+    background-color: #80ed99; 
 }

@@ -19,7 +19,7 @@ export function WeekTimetable(props: {
     return (
         <section className={styles.container}>
             <WeekNavigator 
-            shift={props.timetableWeekState.shift} 
+            timetableWeekState={props.timetableWeekState} 
             dispatch={props.dispatch}
             currentFilters={props.currentFilters}
             switchWeek={switchWeek}

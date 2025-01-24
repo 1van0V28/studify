@@ -131,11 +131,13 @@ export type TemplatesActionTypes =
     | 'change_template' 
     | 'change_event'
     | 'clear_timetable'
+    | 'apply_templates'
 
 export interface TemplatesAction {
     type: TemplatesActionTypes,
     templateInfo?: TemplateInfoFull,
     eventInfo?: EventInfoFull,
+    templates?: Templates
 }
 
 export interface EventInfoBase { // необходимо для внесения изменений в полученное расписание
@@ -155,6 +157,8 @@ export interface EventInfoFull extends EventInfoBase {
     test?: boolean,
     project?: boolean,
     colloquium?: boolean,
+    created_at?: string,
+    updated_at?: string,
 }
 
 export interface TemplateInfoFull {
@@ -162,12 +166,33 @@ export interface TemplateInfoFull {
     name: string,
     description?: string,
     timetable: TimetableWeek,
+    created_at?: string,
+    updated_at?: string,
 }
 
-export interface DataAuth {
+export interface Data {
     status: string,
     message: string,
+}
+
+export interface DataAuth extends Data {
     data: {
-        user: UserState
+        user: UserState,
+    },
+}
+
+export interface DataEvent extends Data {
+    data: {
+        event: EventInfoFull,
     }
+}
+
+export interface DataWeek extends Data {
+    data: {
+        week: TimetableWeek,
+    },
+}
+
+export interface DataTemplates extends Data {
+    data: Templates
 }

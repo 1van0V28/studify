@@ -6,6 +6,7 @@
     outline: 3px solid #ced4da;
     font-size: 1em;
     resize: none;
+    transition: outline-color 0.25s;
 }
 
 .text::placeholder {

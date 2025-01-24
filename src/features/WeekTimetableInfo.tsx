@@ -1,6 +1,5 @@
 import { FiltersInfo, EventInfoFull, TimetableWeek } from '@/app/types'
 import { weekdaysList, weekdaysMap } from '@/app/initData'
-import { testWeekTableData } from '@/app/testData'
 import { DayInfo } from '@/shared/DayInfo'
 import { Event } from '@/widgets/Event'
 import { EventClear } from '@/widgets/EventClear'
@@ -44,7 +43,7 @@ export function WeekTimetableInfo(props: {
     const getDayInfoList = function() {
         const dayInfoFullList = weekdaysList.map((weekday, index) => {
             const dayInfoKey = crypto.randomUUID()
-            const numberLessons = Object.keys(testWeekTableData[weekday]).length
+            const numberLessons = Object.keys(props.currentTimetable[weekday]).length
             if (props.shift !== undefined) {
                 const startDate = getStartDate(props.shift)
                 const dayInfoDate = new Date(startDate.getTime())

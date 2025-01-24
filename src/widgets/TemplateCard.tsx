@@ -59,7 +59,7 @@ export function TemplateCard(props: {
                 <button className={styles.button} onClick={templateCardApplyClick}>Применить</button>
             </div>
             <div className={templateCardStyle.window}>
-                {props.templateInfo.description}
+                {props.templateInfo.description ?? ''}
             </div>
         </li>
     )

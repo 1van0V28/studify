@@ -5,6 +5,7 @@
     background-color: transparent;
     font-size: larger;
     cursor: pointer;
+    transition: border-bottom-color 0.5s, color 0.5s;
 }
 
 .button {

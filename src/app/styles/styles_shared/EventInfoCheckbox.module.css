@@ -16,25 +16,26 @@
     border-radius: 1em;
     background-color: #f8f9fa;
     font-size: 1em;
+    transition: background-color 0.5s;
     cursor: pointer;
 }
 
 .label_practice {
-    border: 3px solid #FFFAA0;
-    color: #FFAA33;
+    border: 3px solid #cbf3f0;
+    color: #2ec4b6;
 }
 
 label .input:checked + .label_practice {
-    background-color: #FFFAA0;
+    background-color: #cbf3f0;
 }
 
 .label_lecture {
-    border: 3px solid #f3d5b5;
-    color: #b08968;
+    border: 3px solid #ffbf69;
+    color: #e85d04;
 }
 
 label .input:checked + .label_lecture {
-    background-color: #f3d5b5;
+    background-color: #ffbf69;
 }
 
 .label_test {

@@ -35,8 +35,17 @@
     height: 82vh;
 }
 
+.today,
+.today:hover {
+    transition: color 0.5s;
+    cursor: pointer;
+}
 
 .today:hover {
     color: #57cc99;
-    cursor: pointer;
+}
+
+.today:active {
+    transition: color 0.1s ;
+    color: #80ed99;
 }

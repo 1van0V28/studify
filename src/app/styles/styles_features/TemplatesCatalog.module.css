@@ -43,6 +43,19 @@
     max-height: 80vh;
     background-color: #f8f9fa;
     box-shadow: 0 0 10px 0 #6c757d;
+    animation-name: show;
+    animation-duration: 0.25s;
+}
+
+@keyframes show {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 100;
+    }
 }
 
 

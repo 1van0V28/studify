@@ -1,6 +1,11 @@
 import { Dispatch } from 'react'
-import { TimetableTodayState, TimetableWeekAction, FiltersInfo, EventInfoFull, Weekdays } from '@/app/types'
-import { testTodayTableData } from '@/app/testData'
+import { 
+    TimetableTodayState, 
+    TimetableWeekAction, 
+    FiltersInfo, 
+    EventInfoFull, 
+    Weekdays 
+} from '@/app/types'
 import { DayInfo } from '@/shared/DayInfo'
 import { Event } from '@/widgets/Event'
 import { EventClear } from '@/widgets/EventClear'
@@ -15,7 +20,7 @@ export function TodayTimetable(props: {
     openEventInfo: (eventInfo: EventInfoFull, eventType: 'event' | 'event_today') => void
 }) {
     const todayDate = new Date()
-    const numberLessons = Object.keys(testTodayTableData).length
+    const numberLessons = Object.keys(props.timetableTodayState.timetable).length
 
     const todayClick = function() {
         props.dispatch({type: 'switch_week_today'})
@@ -29,7 +34,7 @@ export function TodayTimetable(props: {
                 eventList.push(
                     <Event 
                     key={eventKey} 
-                    eventInfo={testTodayTableData[String(i)]}
+                    eventInfo={props.timetableTodayState.timetable[String(i)]}
                     currentFilters={props.currentFilters}
                     eventType={'event_today'} 
                     openEventInfo={props.openEventInfo} />

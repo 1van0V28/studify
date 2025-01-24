@@ -1,5 +1,6 @@
 import { Dispatch } from 'react'
 import { TemplateInfoFull, TemplatesAction } from '@/app/types'
+import { DeleteButton } from '@/shared/DeleteButton'
 import { AuthButton } from '@/shared/AuthButton'
 import styles from '@/app/styles/styles_widgets/ConfirmButtonsBlockTemplate.module.css'
 
@@ -10,19 +11,21 @@ export function ConfirmButtonsBlockTemplate(props: {
     dispatch: Dispatch<TemplatesAction>
 }) {
     const deleteButtonClick = async function() {
-        const response = await fetch('', {
-            method: 'POST',
+        const response = await fetch(`http://localhost::8000/api/week-templates/${props.templateInfo.id}`, {
+            method: 'DELETE',
         })
 
         if (response.ok) {
             props.dispatch({type: 'delete_template', templateInfo: props.templateInfo})
         } else {
-            throw Error()
+            console.log('Ошибка с удалением шаблона')
         }
     }
 
     const confirmButtonClick = async function() {
-        fetch(`${props.templateInfo.id ?? ''}`)
+        fetch(`http://localhost::8000/api/week-templates/${props.templateInfo.id ?? ''}`, {
+            method: props.templateInfo.id ? 'PATCH' : 'POST'
+        })
             .then((response) => response.json())
             .then((templateInfo: TemplateInfoFull) => {
                 props.dispatch({type: 'save_template', templateInfo: templateInfo})
@@ -33,11 +36,7 @@ export function ConfirmButtonsBlockTemplate(props: {
     return (
         <div className={styles.container_submit}>
             <div className={styles.container_submit_button}>
-                <input className={styles.delete} 
-                type='button' 
-                value='Удалить' 
-                onClick={deleteButtonClick}>
-                </input>
+                <DeleteButton deleteElement={deleteButtonClick}/>
             </div>
             <div className={styles.container_submit_button}>
                 <AuthButton

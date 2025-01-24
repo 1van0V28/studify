@@ -39,7 +39,7 @@ export function LoginSection() {
     const loginSubmit = async function(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        fetch('http://localhost:8000/login', {
+        fetch('http://localhost::8000/api/login', {
             method: 'POST',
             body: JSON.stringify(inputState)
         })
@@ -48,7 +48,7 @@ export function LoginSection() {
                 setUser!(data.data.user)
                 router.push('/home')
             })
-            .catch((error) => console.log(error)) // обновление состояния об ошибке
+            .catch((error) => {console.log(error)})
     }
 
     return (

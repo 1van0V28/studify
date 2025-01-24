@@ -1,5 +1,6 @@
 import { Dispatch } from 'react'
-import { TimetableWeekAction, FiltersInfo } from '@/app/types'
+import { useRouter } from 'next/navigation'
+import { TimetableWeekState, TimetableWeekAction, FiltersInfo } from '@/app/types'
 import { Filters } from './Filters'
 import { TemplatesCatalog } from './TemplatesCatalog'
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined'
@@ -11,12 +12,14 @@ import styles from '@/app/styles/styles_features/WeekNavigator.module.css'
 
 
 export function WeekNavigator(props: {
-    shift: number,
+    timetableWeekState: TimetableWeekState,
     dispatch: Dispatch<TimetableWeekAction>,
     currentFilters: FiltersInfo,
     switchWeek: (shift: number) => void
     changeFilters: (filters: FiltersInfo) => void,
 }) {
+    const router = useRouter()
+
     const switchPrevWeek = function() {
         props.switchWeek(-1)
     }
@@ -30,11 +33,15 @@ export function WeekNavigator(props: {
     }
 
     const saveButtonClick = async function() {
-        const response = await fetch('', {
+        const response = await fetch(`http://localhost::8000/api/register/events/week?shift=${props.timetableWeekState.shift}`, {
             method: 'POST',
+            body: JSON.stringify({data: props.timetableWeekState.timetable})
         })
+        
         if (response.ok) {
-            // сообщаем о завершении запроса
+            router.refresh()
+        } else {
+            console.log('Ошибка в сохранении изменений')
         }
     }
 
@@ -50,7 +57,7 @@ export function WeekNavigator(props: {
                 <button className={styles.button} onClick={switchPrevWeek}>
                     <ArrowBackOutlinedIcon className={styles.button_icon }/>
                 </button>
-                <WeekInfo shift={props.shift} />
+                <WeekInfo shift={props.timetableWeekState.shift} />
                 <button className={styles.button} onClick={switchNextWeek}>
                     <ArrowForwardOutlinedIcon className={styles.button_icon} />
                 </button>

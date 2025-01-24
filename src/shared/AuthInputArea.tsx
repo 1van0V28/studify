@@ -2,13 +2,22 @@ import { ReactNode } from 'react'
 import styles from '@/app/styles/styles_shared/AuthInputArea.module.css'
 
 
-const getStyles = function(error: string, inputValue: string) {
+const getLabelStyles = function(error: string, inputValue: string) {
     if (!inputValue) {
-        return styles.label
+        return {
+            label: styles.label,
+            error: styles.error_clear,
+        }
     } else if (!error && inputValue) {
-        return styles.label_valid
+        return {
+            label: styles.label_valid,
+            error: styles.error_clear,
+        }
     } else {
-        return styles.label_error
+        return {
+            label: styles.label_error,
+            error: styles.error,
+        }
     }
 }
 
@@ -20,13 +29,13 @@ export function AuthInputArea(props: {
     inputValue: string,
     children: ReactNode
 }) {
-    const labelStyle = getStyles(props.error, props.inputValue)
+    const labelStyles = getLabelStyles(props.error, props.inputValue)
 
     return (
         <div className={styles.container}>
             <div className={styles.container_info}>
-                <label className={labelStyle} htmlFor={props.id}>{props.labelName}</label>
-                <span className={styles.error}>{props.error}</span>
+                <label className={labelStyles.label} htmlFor={props.id}>{props.labelName}</label>
+                <span className={labelStyles.error}>{props.error}</span>
             </div>
             {props.children}
         </div>

@@ -46,7 +46,7 @@ export function WeekInfo(props: {shift: number}) {
     return (
         <div className={styles.container}>
             <h1>{formattedDate}</h1>
-            <p className={styles.parity}>четная</p>
+            <p className={styles.parity}>неделя</p>
         </div> 
     )
 }

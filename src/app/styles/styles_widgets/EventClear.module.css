@@ -15,6 +15,7 @@
 
 .add {
     color: #6c757d;
+    transition: color 0.5s;
 }
 
 .container:hover .add{

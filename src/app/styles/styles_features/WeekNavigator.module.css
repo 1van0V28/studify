@@ -26,10 +26,13 @@
 }
 
 
-.button {
+.button,
+.button:hover {
     padding: 1vw;
     border-radius: 100%;
     background-color: transparent;
+    color: #6c757d;
+    transition: background-color 0.25s;
     cursor: pointer;
 }
 
@@ -37,8 +40,12 @@
     background-color: #dee2e6;
 }
 
+.button:active {
+    color: #57cc99;
+}
+
 
 .button_icon {
     width: 2vw;
-    height: 2vw;
+    height: 2vw;   
 }
