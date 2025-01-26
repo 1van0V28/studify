@@ -140,6 +140,7 @@ export function HomePage() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
+            credentials: 'include',
         })
             .then((response) => response.json())
             .then((data: DataWeek) => {
@@ -162,6 +163,7 @@ export function HomePage() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
+            credentials: 'include',
         })
             .then((response) => response.json())
             .then((data: DataWeek) => {

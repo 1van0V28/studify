@@ -6,7 +6,7 @@ import styles from '@/app/styles/styles_shared/AddTemplateButton.module.css'
 
 export function AddTemplateButton(props: {openTemplateInfo: (templateInfo: TemplateInfoFull) => void}) {
     const buttonClick = function() {
-        props.openTemplateInfo(initTemplateInfo)
+        props.openTemplateInfo({...initTemplateInfo})
     }
     
     return (

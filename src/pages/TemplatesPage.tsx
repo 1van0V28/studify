@@ -95,6 +95,7 @@ export function TemplatesPage() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
+            credentials: 'include',
         })
             .then((response) => response.json())
             .then((data: DataTemplates) => {

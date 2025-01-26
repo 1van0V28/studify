@@ -23,6 +23,7 @@ export function TemplateHeader(props: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify(props.templatesState.templateInfo)
         }) // с id, потому что такое сохранение работатет только с созданными
             .then((response) => response.json())

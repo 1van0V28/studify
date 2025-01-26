@@ -25,6 +25,7 @@ export function AccountButton() {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
+                credentials: 'include',
             })
             if (response.ok) {
                 console.log('Вышел из аккаунта')
@@ -42,6 +43,7 @@ export function AccountButton() {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
+                credentials: 'include',
             })
             if (response.ok) {
                 console.log('Вышел из аккаунта для смены')

@@ -22,6 +22,7 @@ export function ConfirmButtonsBlockEvent(props: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
+                    credentials: 'include',
                 })
                 if (response.ok) {
                     props.eventInfoState.impactObjectDispatch!({
@@ -45,6 +46,7 @@ export function ConfirmButtonsBlockEvent(props: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify(props.eventInfoState.eventInfo)
             }) // при наличии происходит обновление, при отсутствии - создание нового
                 .then((response) => response.json())

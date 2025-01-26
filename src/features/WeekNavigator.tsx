@@ -34,12 +34,13 @@ export function WeekNavigator(props: {
 
     const saveButtonClick = async function() {
         try {
-            const response = await fetch(`http://localhost:8000/api/register/events/week?shift=${props.timetableWeekState.shift}`, {
+            const response = await fetch(`http://localhost:8000/api/events/week?shift=${props.timetableWeekState.shift}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify({data: props.timetableWeekState.timetable})
             })
             if (response.ok) {

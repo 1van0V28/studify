@@ -18,6 +18,7 @@ export function ConfirmButtonsBlockTemplate(props: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
+                credentials: 'include',
             })
             if (response.ok) {
                 props.dispatch({type: 'delete_template', templateInfo: props.templateInfo})
@@ -34,6 +35,7 @@ export function ConfirmButtonsBlockTemplate(props: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify(props.templateInfo)
         })
             .then((response) => response.json())
