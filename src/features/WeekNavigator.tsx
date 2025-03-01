@@ -41,10 +41,10 @@ export function WeekNavigator(props: {
                     'Accept': 'application/json',
                 },
                 credentials: 'include',
-                body: JSON.stringify({data: props.timetableWeekState.timetable})
+                body: JSON.stringify({week: props.timetableWeekState.timetable})
             })
             if (response.ok) {
-                router.refresh()
+                window.location.reload()
             }
         } catch(error) {
             console.log('Ошибка сохранения расписания', error)

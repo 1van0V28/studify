@@ -196,3 +196,7 @@ export interface DataWeek extends Data {
 export interface DataTemplates extends Data {
     data: Templates
 }
+
+export interface DataTemplateInfo extends Data {
+    data: TemplateInfoFull,
+}

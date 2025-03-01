@@ -45,6 +45,7 @@ export function LoginSection() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify(inputState)
         })
             .then((response) => response.json())

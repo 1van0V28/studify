@@ -10,13 +10,14 @@ const templatesReducer = function(templatesState: TemplatesState, action: Templa
     if (action.type === 'delete_template') {
         const newTemplatesState = {...templatesState}
 
-        delete newTemplatesState.templates[action.eventInfo!.id!]
+        delete newTemplatesState.templates[action.templateInfo!.id!]
 
         return newTemplatesState
     } else if (action.type === 'save_template') {
         const newTemplatesState = {...templatesState}
 
         newTemplatesState.templates[action.templateInfo!.id!] = {...action.templateInfo!}
+        newTemplatesState.templateInfo = {...action.templateInfo!}
 
         return newTemplatesState
     } else if (action.type === 'delete_event') {
@@ -63,6 +64,7 @@ export function TemplatesPage() {
         impactObjectName: 'event',
         impactObjectDispatch: dispatch,
     })
+    
     const templateInfoRef = useRef<HTMLDialogElement>(null)
     const eventInfoRef = useRef<HTMLDialogElement>(null)
 

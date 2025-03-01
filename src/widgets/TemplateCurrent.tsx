@@ -25,7 +25,7 @@ export function TemplateCurrent(props: {
             currentFilters={filtersState}
             changeFilters={changeFilters} />
             <WeekTimetableInfo 
-            isLoading = {props.templatesState.isLoading}
+            isLoading={props.templatesState.isLoading}
             currentTimetable={props.templatesState.templateInfo.timetable} 
             currentFilters={filtersState} 
             openEventInfo={props.openEventInfo} /> 

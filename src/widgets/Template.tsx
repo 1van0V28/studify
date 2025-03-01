@@ -34,6 +34,7 @@ export function Template(props: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
+                credentials: 'include',
             })
             if (response.ok) {
                 props.dispatch({type: 'delete_template', templateInfo: props.templateInfo})

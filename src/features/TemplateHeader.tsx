@@ -1,5 +1,5 @@
 import { Dispatch } from 'react'
-import { TemplatesState, FiltersInfo, TemplatesAction, TemplateInfoFull } from '@/app/types'
+import { TemplatesState, FiltersInfo, TemplatesAction, DataTemplateInfo } from '@/app/types'
 import { Filters } from './Filters'
 import { ChangesClearButton } from '@/shared/ChangesClearButton'
 import { ChangesSaveButton } from '@/shared/ChangesSaveButton'
@@ -27,8 +27,8 @@ export function TemplateHeader(props: {
             body: JSON.stringify(props.templatesState.templateInfo)
         }) // с id, потому что такое сохранение работатет только с созданными
             .then((response) => response.json())
-            .then((templateInfo: TemplateInfoFull) => {
-                props.dispatch({type: 'save_template', templateInfo: templateInfo})
+            .then((data: DataTemplateInfo) => {
+                props.dispatch({type: 'save_template', templateInfo: data.data})
             })
             .catch((error) => {console.log('Ошибка обновления шаблона', error)})
     }

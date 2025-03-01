@@ -38,7 +38,7 @@ export function AccountButton() {
     const changeClick = async function() {
         try {
             const response = await fetch('http://localhost:8000/api/logout', {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',

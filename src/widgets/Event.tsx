@@ -54,7 +54,9 @@ export function Event(props: {
     return (
         <div className={eventBorderStyle} onClick={eventClick}>
             <div>
-                <h2>{props.eventInfo.room}</h2>
+                <span className={styles.room_type}>
+                    {props.eventInfo.room}
+                </span>
                 <span className={eventTypeStyle}>{eventType}</span>
             </div>
             <div className={styles.subject}>

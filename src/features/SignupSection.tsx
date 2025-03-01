@@ -80,6 +80,7 @@ export function SignupSection() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify(inputState)
         })
             .then((response) => response.json())

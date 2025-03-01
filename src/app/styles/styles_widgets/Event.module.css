@@ -63,6 +63,16 @@
 }
 
 
+.room_type {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.5em;
+}
+
+
 .subject {
     display: -webkit-box;
     -webkit-line-clamp: 2;

@@ -1,5 +1,5 @@
 import { Dispatch } from 'react'
-import { TemplateInfoFull, TemplatesAction } from '@/app/types'
+import { TemplateInfoFull, TemplatesAction, DataTemplateInfo } from '@/app/types'
 import { DeleteButton } from '@/shared/DeleteButton'
 import { AuthButton } from '@/shared/AuthButton'
 import styles from '@/app/styles/styles_widgets/ConfirmButtonsBlockTemplate.module.css'
@@ -39,8 +39,8 @@ export function ConfirmButtonsBlockTemplate(props: {
             body: JSON.stringify(props.templateInfo)
         })
             .then((response) => response.json())
-            .then((templateInfo: TemplateInfoFull) => {
-                props.dispatch({type: 'save_template', templateInfo: templateInfo})
+            .then((data: DataTemplateInfo) => {
+                props.dispatch({type: 'save_template', templateInfo: data.data})
             })
             .catch((error) => {console.log('Ошибка сохранения шаблона', error)})
     }

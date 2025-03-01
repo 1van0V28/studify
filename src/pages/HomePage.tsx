@@ -9,7 +9,7 @@ import {
     Weekdays
 } from '@/app/types'
 import { getStartDate } from '@/app/lib/date'
-import { initTimetableWeek, initTimetableWeekState, initTimetableTodayState, initEventInfoState } from '@/app/initData'
+import { weekdaysOrderMap, initTimetableWeek, initTimetableWeekState, initTimetableTodayState, initEventInfoState } from '@/app/initData'
 import { Timetable } from '@/entities/Timetable'
 import { EventInfo } from '@/widgets/EventInfo'
 
@@ -26,7 +26,7 @@ const getformattedTimetableWeekState = function(
         for (let i = 1; i < 9; i++) {
             if (newTimetableWeekState.timetable[weekday as Weekdays][String(i)]) {
                 const weekdayDate = new Date(startDate.getTime())
-                weekdayDate.setDate(weekdayDate.getDate() + i)
+                weekdayDate.setDate(weekdayDate.getDate() + weekdaysOrderMap[weekday as Weekdays])
                 const date = weekdayDate.toLocaleDateString('zh-Hans-CN').replace(/[^apm\d]+/gi, '-')
                 newTimetableWeekState.timetable[weekday as Weekdays][String(i)].date = date
             }
@@ -85,7 +85,11 @@ const timetableTodayReducer = function(timetableTodayState: TimetableTodayState,
 
         return newTimetableTodayState
     } else if (action.type === 'save_event') {
-        return {...timetableTodayState, [action.eventInfo!.order]: {...action.eventInfo!}}
+        const newTimetableTodayState = {...timetableTodayState}
+
+        newTimetableTodayState.timetable[action.eventInfo!.order] = {...action.eventInfo!}
+
+        return newTimetableTodayState
     } else if (action.type === 'apply_timetable') {
         return {...timetableTodayState, 
             timetable: {...action.timetable!},
@@ -167,8 +171,9 @@ export function HomePage() {
         })
             .then((response) => response.json())
             .then((data: DataWeek) => {
-                const todayDay = new Date().toLocaleDateString('en-US', {weekday: 'long'}) as Weekdays
-                timetableTodayDispatch({type: 'apply_timetable', timetable: data.data.week[todayDay]})
+                let todayDay = new Date().toLocaleDateString('en-US', {weekday: 'long'})
+                todayDay = todayDay.slice(0, 1).toLowerCase() + todayDay.slice(1)
+                timetableTodayDispatch({type: 'apply_timetable', timetable: data.data.week[todayDay as Weekdays]})
             })
             .catch((error) => {console.log('Ошибка получения расписания на сегодня', error)})
     }, [])
